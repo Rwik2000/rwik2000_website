@@ -375,7 +375,7 @@ section .container {
 }
 
 .section-title h2 {
-  font-size: 14px;
+  font-size: 20px;
   font-weight: 500;
   padding: 0;
   line-height: 1px;
@@ -414,6 +414,10 @@ section .container {
   color: #18d26e;
 }
 
+.about-me .content p{
+  font-size: 20px;
+}
+
 .about-me .content ul {
   list-style: none;
   padding: 0;
@@ -436,10 +440,13 @@ section .container {
   line-height: 0;
 }
 
-.about-me .content p:last-child {
-  margin-bottom: 0;
+.about-me p{
+  font-size: 20px;
 }
 
+/* .about-me .content p:last-child {
+  margin-bottom: 0;
+} */
 /*--------------------------------------------------------------
 # Counts
 --------------------------------------------------------------*/
