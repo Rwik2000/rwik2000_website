@@ -696,8 +696,17 @@ section .container {
 .services .icon-box {
   text-align: center;
   background: rgba(204, 204, 204, 0.1);
-  padding: 80px 20px;
+  padding: 30px 20px;
   transition: all ease-in-out 0.3s;
+  margin-bottom: 10px;
+
+}
+
+.services .icon-box img {
+  height: 200px; /* Adjust this value to your desired height */
+  width: auto; /* This will maintain the aspect ratio of the images */
+  object-fit: cover; /* This will ensure the images cover the area without distorting */
+  margin-bottom: 20px;
 }
 
 .services .icon-box .icon {
@@ -735,7 +744,7 @@ section .container {
 .services .icon-box h4 {
   font-weight: 700;
   margin-bottom: 15px;
-  font-size: 24px;
+  font-size: 18px;
 }
 
 .services .icon-box h4 a {

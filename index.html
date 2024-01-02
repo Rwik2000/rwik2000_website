@@ -53,7 +53,7 @@
         <ul>
           <li><a class="nav-link active" href="#header">Home</a></li>
           <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#">Publications</a></li>
+          <li><a class="nav-link" href="#pubs">Publications</a></li>
           <li><a class="nav-link" href="#">Projects</a></li>
           <!-- <li><a class="nav-link" href="#">Portfolio</a></li>
           <li><a class="nav-link" href="#">Contact</a></li> -->
@@ -153,24 +153,6 @@
                   <h3>Full Stack Robotics</h3>
                 </div>
               </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <!-- <i class="ri-gradienter-line" style="color: #ffa76e;"></i> -->
-                  <h3> </h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <!-- <i class="ri-file-list-3-line" style="color: #11dbcf;"></i> -->
-                  <h3></h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <!-- <i class="ri-price-tag-2-line" style="color: #4233ff;"></i> -->
-                  <h3></h3>
-                </div>
-              </div>
               <!-- <div class="col-lg-3 col-md-4 mt-4">
                 <div class="icon-box">
                   <i class="ri-anchor-line" style="color: #b2904f;"></i>
@@ -201,6 +183,60 @@
 
         </div>
       </div>
+      <br><br>
+
+      <div class="section-title">
+        <h2>Background</h2>
+      </div>
+      <p>
+      Hello there! Thanks for taking the time to visit my website. I hail from Navi Mumbai, India, and 
+      now call Seattle my home as I pursue my MS degree. My upbringing was blessed with supportive parents
+       who encouraged me to explore beyond academics. Playing the piano, painting, and my passion 
+       for football became integral parts of my life.  I cracked the IIT-JEE Advanced and got into Mechanical 
+       Engineering at the Indian Institute of Technology, Gandhinagar. As captain of the college soccer team, 
+       I represented the squad in state and national-level tournaments. Additionally, I was part of the college 
+       band, performing at various fests and arenas.  I was awarded the Institute's Silver Medal and Director's 
+       Silver Medal for outstanding performance in academics and all-round performance respectively.
+      </p>
+      <br>
+
+      <div class="section-title">
+        <h2>Research Journey till Dec 2023</h2>
+      </div>
+
+      <p>My research journey started at the Indian Institute of Technology, Gandhinagar (IIT Gn), 
+        with building an autonomous 1/10th scale race car to control at high speeds. We used a novel 
+        temporal shallow-deep neural network to detect roads, a genetic algorithm for local planning,
+         and PID to control the car. This helped me gain insights into the interplay of perception, 
+         planning, and control and led to my first publication "Memory Guided Road Detection". 
+         Concurrently, my involvement in the All-Terrain-Vehicle (ATV) building team for off-road 
+         terrains made me question the applicability of our on-road algorithms in off-road settings. 
+         This channelized my interest in robotics for unstructured environments. <br></p>
+
+        <p>At the University of Washington, Seattle (UW), under Prof. Byron Boots, I have been working in 
+        the perception team of DARPA RACER, which focuses on running ATVs in unstructured off-road 
+        terrains. Our team uses point-cloud data for semantic segmentation to determine the local map 
+        around the vehicle. Point-cloud data becomes sparse with distance, and the segmentation model 
+        is over-confident in the sparse regions. Thus, I added an aleatoric uncertainty module to quantify 
+        the model confidence to facilitate safer navigation. Sparser point-clouds also mean the risk of 
+        undetected objects, prompting us to use object detection techniques using camera images. However, 
+        their practicality is limited without post-processing steps like object tracking and temporal 
+        aggregation, leading me to develop a real-time multi-object tracker. RACER's reliance on multiple
+         LiDAR and camera sensors for advanced off-road navigation raises a key question for my Ph.D. 
+         research: “Is efficient locomotion and navigation with fewer sensors achievable?" Addressing 
+         this could reduce costs and power consumption, making robots more practical for real-world applications. <br></p>
+        
+        <p>Working under Prof. Harish PM, at IITGn, in our journal article "Impact of Added Passive Compliance on the Performance 
+        of Tip-Actuated Flexible Manipulators" taught me the practical significance of the theoretical concepts from control 
+        theory. At UW, collaborating with Prof. Guanya Shi, I was introduced to Reinforcement Learning (RL) and Optimal 
+        Control / Model Predictive Control (MPC), deepening my appreciation for controls. In our paper "DATT : Deep Adaptive 
+        Trajectory Tracking for Quadrotor Control", we developed a novel model-free RL framework for tracking infeasible 
+        trajectories, adaptable to external conditions like wind and payload, on low-cost drones, showing a 54% improvement 
+        over MPC. Next, we identified the strengths and limitations of MPC and RL. This led us to think, "Why not blend both 
+        to leverage the robustness of model-based MPC and the adaptability of model-free RL?" Consequently, in the paper, 
+        "Deep Model Predictive Optimization", we showed that blending MPC with RL enables drones to perform high-precision 
+        tasks like agile flips. This gives me the promise that learning-based control enables robust and agile navigation 
+        on low-cost robots and has brought them closer to real-world applications.</p>
 
     </div><!-- End About Me -->
 
@@ -278,61 +314,65 @@
     </div>
   </section><!-- End Resume Section -->
 
-  <!-- ======= Services Section ======= -->
-  <section id="services" class="services">
+  <!-- ======= Publication Section ======= -->
+  <section id="pubs" class="services">
     <div class="container">
 
       <div class="section-title">
-        <h2>Services</h2>
-        <p>My Services</p>
+        <h2>Publications</h2>
+        <p>2023</p>
       </div>
 
       <div class="row">
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
           <div class="icon-box">
-            <div class="icon"><i class="bx bxl-dribbble"></i></div>
-            <h4><a href="">Lorem Ipsum</a></h4>
-            <p>Voluptatum deleniti atque corrupti quos dolores et quas molestias excepturi</p>
+            <!-- <div class="icon"><i class="bx bxl-dribbble"></i></div>
+             -->
+             <img src="assets/img/dmpo.png" class="img-fluid" alt="">
+             <h4><a href="">Deep Model Predictive Optimization</a></h4>
+             <p style="font-weight: bold; font-style: italic;">Jacob Sacks, Rwik Rana, Kevin Huang, Alex Spitzer, Guanya Shi, Byron Boots</p>
+            <p>Submitted to ICRA 2024</p>
+            <p>[ArXiv] [Website] [CoRL 2023 Workshop] </p>
+            
           </div>
         </div>
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-file"></i></div>
-            <h4><a href="">Sed ut perspiciatis</a></h4>
-            <p>Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore</p>
+            <!-- <div class="icon"><i class="bx bx-file"></i></div>
+             -->
+             <img src="assets/img/star_ppo_pid_mppi_L1.gif" class="img-fluid" alt="">
+             <h4><a href="">DATT: Deep Adaptive Trajectory Tracking for Quadrotor Control</a></h4>
+             <p style="font-weight: bold; font-style: italic;">Kevin Huang, Rwik Rana, Alexander Spitzer, Guanya Shi, Byron Boots</p>
+            <p>Proceedings of The 7th Conference on Robot Learning</p>
+            <p>[PMLR] [ArXiv] [Website]</p>
           </div>
         </div>
 
         <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-tachometer"></i></div>
-            <h4><a href="">Magni Dolores</a></h4>
-            <p>Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia</p>
+            <!-- <div class="icon"><i class="bx bx-tachometer"></i></div>
+             -->
+            <img src="assets/img/2R_setup.png" class="img-fluid" alt="">
+            <h4><a href="">Impact of Added Passive Compliance on the Performance of Tip-Actuated Flexible Manipulators</a></h4>
+            <p style="font-weight: bold; font-style: italic;">Barat S., Sushrut Surve, Rwik Rana, Madhu Vadali, Harish J. Palanthandalam-Madapusi</p>
+            <p>ASME Journal of Dynamic Systems, Measurement, and Control</p>
+            <p>[Journal]</p>
           </div>
         </div>
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-world"></i></div>
-            <h4><a href="">Nemo Enim</a></h4>
-            <p>At vero eos et accusamus et iusto odio dignissimos ducimus qui blanditiis</p>
-          </div>
+        <div class="section-title">
+          <p>2022</p>
         </div>
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
+        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
           <div class="icon-box">
-            <div class="icon"><i class="bx bx-slideshow"></i></div>
-            <h4><a href="">Dele cardo</a></h4>
-            <p>Quis consequatur saepe eligendi voluptatem consequatur dolor consequuntur</p>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4">
-          <div class="icon-box">
-            <div class="icon"><i class="bx bx-arch"></i></div>
-            <h4><a href="">Divera don</a></h4>
-            <p>Modi nostrum vel laborum. Porro fugit error sit minus sapiente sit aspernatur</p>
+             <img src="assets/img/resnet101.gif" class="img-fluid" alt="">
+             <h4><a href="">Memory Guided Road Detection</a></h4>
+             <p style="font-weight: bold; font-style: italic;">Rwik Rana, Praveen Venkatesh, Varun Jain</p>
+            <p>International Conference Image Analysis and Processing (ICIAP) 2022, Lecce, Italy</p>
+            <p>[ArXiv] [Springer]</p>
+            
           </div>
         </div>
 
