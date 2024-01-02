@@ -767,7 +767,7 @@ section .container {
 }
 
 .services .icon-box:hover {
-  background: #18d26e;
+  background: rgb(24, 210, 110, 0.5);
   border-color: #18d26e;
 }
 
