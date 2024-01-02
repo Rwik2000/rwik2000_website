@@ -699,6 +699,7 @@ section .container {
   padding: 30px 20px;
   transition: all ease-in-out 0.3s;
   margin-bottom: 10px;
+  border-radius: 20px;
 
 }
 
@@ -707,6 +708,7 @@ section .container {
   width: auto; /* This will maintain the aspect ratio of the images */
   object-fit: cover; /* This will ensure the images cover the area without distorting */
   margin-bottom: 20px;
+  border-radius: 20px;
 }
 
 .services .icon-box .icon {
@@ -753,7 +755,7 @@ section .container {
 
 .services .icon-box p {
   line-height: 24px;
-  font-size: 14px;
+  font-size: 12px;
   margin-bottom: 0;
 }
 
@@ -775,7 +777,7 @@ section .container {
 }
 
 .services .icon-box:hover h4 a,
-.services .icon-box:hover p {
+.services .icon-box:hover p a{
   color: #fff;
 }
 
