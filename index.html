@@ -1,650 +1,564 @@
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="en" class="scroll-smooth">
 <head>
-  <meta charset="utf-8">
-  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rwik Rana - Robotics Portfolio</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Google Fonts: Roboto Mono -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@400;700&display=swap" rel="stylesheet">
+    
+    <!-- Custom Styles -->
+    <style>
+        body {
+            font-family: 'Roboto Mono', monospace;
+        }
+        .modal {
+            transition: opacity 0.25s ease;
+        }
+        body.modal-active {
+            overflow-x: hidden;
+            overflow-y: visible !important;
+        }
+        /* Custom scrollbar styles */
+        .scrollbar-custom::-webkit-scrollbar {
+            width: 8px;
+        }
+        .scrollbar-custom::-webkit-scrollbar-track {
+            background: #f1f5f9; /* slate-100 */
+        }
+        .dark .scrollbar-custom::-webkit-scrollbar-track {
+            background: #1f2937; /* gray-800 */
+        }
+        .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: #94a3b8; /* slate-400 */
+            border-radius: 10px;
+        }
+        .dark .scrollbar-custom::-webkit-scrollbar-thumb {
+            background: #4b5563; /* gray-600 */
+        }
+        .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+            background: #64748b; /* slate-500 */
+        }
+        .dark .scrollbar-custom::-webkit-scrollbar-thumb:hover {
+             background: #6b7280; /* gray-500 */
+        }
 
-  <title>Rwik Rana</title>
-  <meta content="" name="description">
-  <meta content="" name="keywords">
+        /* Typing animation */
+        .typewriter span {
+            display: inline-block;
+            overflow: hidden;
+            border-right: .15em solid orange; /* The cursor */
+            white-space: nowrap;
+            margin: 0 auto;
+            letter-spacing: .1em;
+            animation: 
+                typing 3.5s steps(30, end) infinite,
+                blink-caret .75s step-end infinite;
+        }
 
-  <!-- Favicons -->
-  <link href="assets/img/favicon.png" rel="icon">
-  <link href="assets/img/apple-touch-icon.png" rel="apple-touch-icon">
+        @keyframes typing {
+            from, to { width: 0 }
+            40%, 60% { width: 100% }
+        }
 
-  <!-- Google Fonts -->
-  <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,300i,400,400i,600,600i,700,700i|Raleway:300,300i,400,400i,500,500i,600,600i,700,700i|Poppins:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
-
-  <!-- Vendor CSS Files -->
-  <link href="assets/vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
-  <link href="assets/vendor/bootstrap-icons/bootstrap-icons.css" rel="stylesheet">
-  <link href="assets/vendor/boxicons/css/boxicons.min.css" rel="stylesheet">
-  <link href="assets/vendor/glightbox/css/glightbox.min.css" rel="stylesheet">
-  <link href="assets/vendor/remixicon/remixicon.css" rel="stylesheet">
-  <link href="assets/vendor/swiper/swiper-bundle.min.css" rel="stylesheet">
-
-  <!-- Template Main CSS File -->
-  <link href="assets/css/style.css" rel="stylesheet">
-
-  <!-- =======================================================
-  * Template Name: Personal
-  * Updated: Sep 18 2023 with Bootstrap v5.3.2
-  * Template URL: https://bootstrapmade.com/personal-free-resume-bootstrap-template/
-  * Author: BootstrapMade.com
-  * License: https://bootstrapmade.com/license/
-  ======================================================== -->
+        @keyframes blink-caret {
+            from, to { border-color: transparent }
+            50% { border-color: orange; }
+        }
+    </style>
+    <script>
+        // Set theme on page load. It's important to run this before the body renders to avoid flickering.
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    </script>
 </head>
+<body class="bg-white dark:bg-gray-900 text-gray-700 dark:text-gray-300 transition-colors duration-300">
 
-<body>
-
-  <!-- ======= Header ======= -->
-  <header id="header">
-    <div class="container">
-
-      <h1><a href="index.html">Rwik Rana</a></h1>
-      <!-- Uncomment below if you prefer to use an image logo -->
-      <!-- <a href="index.html" class="mr-auto"><img src="assets/img/logo.png" alt="" class="img-fluid"></a> -->
-      <!-- <h2>I'm a passionate <span>graphic designer</span> from New York</h2> -->
-      <h2>Researcher @ <span>Robot Learning Lab</span>, University of Washington, Seattle🤖 </h2>
-
-
-      <nav id="navbar" class="navbar">
-        <ul>
-          <li><a class="nav-link active" href="#header">Home</a></li>
-          <li><a class="nav-link" href="#about">About</a></li>
-          <li><a class="nav-link" href="#pubs">Publications</a></li>
-          <li><a class="nav-link" href="#">Projects</a></li>
-          <!-- <li><a class="nav-link" href="#">Portfolio</a></li>
-          <li><a class="nav-link" href="#">Contact</a></li> -->
-        </ul>
-        <i class="bi bi-list mobile-nav-toggle"></i>
-      </nav><!-- .navbar -->
-
-      <div class="social-links">
-        <a target ="_blank" href="https://twitter.com/rwik_rana" class="twitter"><i class="bi bi-twitter"></i></a>
-        <a target="_blank" href="https://github.com/Rwik2000" class="github"><i class="bi bi-github"></i></a>
-
-        <!-- <a href="#" class="facebook"><i class="bi bi-facebook"></i></a> -->
-        <!-- <a href="#" class="instagram"><i class="bi bi-instagram"></i></a> -->
-        <a target="_blank" href="https://www.linkedin.com/in/rwik-rana/" class="linkedin"><i class="bi bi-linkedin"></i></a>
-      </div>
-
-    </div>
-  </header><!-- End Header -->
-
-  <!-- ======= About Section ======= -->
-  <section id="about" class="about">
-
-    <!-- ======= About Me ======= -->
-    <div class="about-me container">
-
-      <!-- <div class="section-title">
-        <h2>About</h2>
-        <p>Learn more about me</p>
-      </div> -->
-
-      <div class="row">
-        <div class="col-lg-4" data-aos="fade-right">
-          <img src="assets/img/rwik.png" class="img-fluid" alt="">
+    <!-- Header & Navigation -->
+    <header class="bg-white/80 dark:bg-gray-900/80 backdrop-blur-sm fixed top-0 left-0 right-0 z-50 border-b border-gray-200 dark:border-gray-700">
+        <div class="container mx-auto px-6 py-4 flex justify-between items-center">
+            <a href="#home" class="text-2xl font-bold text-gray-900 dark:text-white">Rwik Rana</a>
+            <nav class="hidden md:flex items-center space-x-8">
+                <a href="#about" class="hover:underline">About</a>
+                <a href="#publications" class="hover:underline">Publications</a>
+                <a href="#projects" class="hover:underline">Projects</a>
+                <a href="#contact" class="hover:underline">Contact</a>
+                 <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
+                    <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M17.293 13.293A8 8 0 016.707 2.707a8.001 8.001 0 1010.586 10.586z"></path></svg>
+                    <svg id="theme-toggle-light-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path d="M10 2a1 1 0 011 1v1a1 1 0 11-2 0V3a1 1 0 011-1zm4 8a4 4 0 11-8 0 4 4 0 018 0zm-.464 4.95l.707.707a1 1 0 001.414-1.414l-.707-.707a1 1 0 00-1.414 1.414zm2.12-10.607a1 1 0 010 1.414l-.706.707a1 1 0 11-1.414-1.414l.707-.707a1 1 0 011.414 0zM17 11a1 1 0 100-2h-1a1 1 0 100 2h1zm-7 4a1 1 0 011 1v1a1 1 0 11-2 0v-1a1 1 0 011-1zM5.05 6.464A1 1 0 106.465 5.05l-.708-.707a1 1 0 00-1.414 1.414l.707.707zm-1.414 8.486a1 1 0 011.414 0l.707.707a1 1 0 01-1.414 1.414l-.707-.707a1 1 0 010-1.414zM4 11a1 1 0 100-2H3a1 1 0 000 2h1z" fill-rule="evenodd" clip-rule="evenodd"></path></svg>
+                </button>
+            </nav>
+            <button id="mobile-menu-button" class="md:hidden text-gray-800 dark:text-white focus:outline-none">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"></path></svg>
+            </button>
         </div>
-        <div class="col-lg-8 pt-4 pt-lg-0 content" data-aos="fade-left">
-          <h3>Robotics Researcher and Engineer</h3>
-          <!-- <p class="fst-italic">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore
-            magna aliqua.
-          </p> -->
-          <!-- <div class="row">
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Birthday:</strong> <span>1 May 1995</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Website:</strong> <span>www.example.com</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Phone:</strong> <span>+123 456 7890</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>City:</strong> <span>New York, USA</span></li>
-              </ul>
-            </div>
-            <div class="col-lg-6">
-              <ul>
-                <li><i class="bi bi-chevron-right"></i> <strong>Age:</strong> <span>30</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Degree:</strong> <span>Master</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>PhEmailone:</strong> <span>email@example.com</span></li>
-                <li><i class="bi bi-chevron-right"></i> <strong>Freelance:</strong> <span>Available</span></li>
-              </ul>
-            </div>
-          </div> -->
-          <p>
-            I am an MS student at the University of Washington, Seattle, specializing in robotics research and engineering with a focus on computer vision and controls of robots. Currently, I hold the position of Research Assistant at the Robot Learning Lab, working with Prof. Byron Boots.
-          </p>
-
-          <div class="interests container">
-
-            <div class="section-title">
-              <h2>Interests</h2>
-            </div>
-      
-            <div class="row">
-              <div class="col-lg-3 col-md-4">
-                <div class="icon-box">
-                  <!-- <i class="ri-store-line" style="color: #ffbb2c;"></i> -->
-                  <h3>Vision-based controls and navigation </h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <!-- <i class="ri-bar-chart-box-line" style="color: #5578ff;"></i> -->
-                  <h3>Self-supervised scene understanding</h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4 mt-md-0">
-                <div class="icon-box">
-                  <!-- <i class="ri-calendar-todo-line" style="color: #e80368;"></i> -->
-                  <h3>Whole-body control</h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4 mt-lg-0">
-                <div class="icon-box">
-                  <!-- <i class="ri-paint-brush-line" style="color: #e361ff;"></i> -->
-                  <h3>Learning-based control</h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <!-- <i class="ri-database-2-line" style="color: #47aeff;"></i> -->
-                  <h3>Full Stack Robotics</h3>
-                </div>
-              </div>
-              <!-- <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <i class="ri-anchor-line" style="color: #b2904f;"></i>
-                  <h3>Dirada Pack</h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <i class="ri-disc-line" style="color: #b20969;"></i>
-                  <h3>Moton Ideal</h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <i class="ri-base-station-line" style="color: #ff5828;"></i>
-                  <h3>Verdo Park</h3>
-                </div>
-              </div>
-              <div class="col-lg-3 col-md-4 mt-4">
-                <div class="icon-box">
-                  <i class="ri-fingerprint-line" style="color: #29cc61;"></i>
-                  <h3>Flavor Nivelanda</h3>
-                </div>
-              </div> -->
-            </div>
-          </div>
-
-
+        <!-- Mobile Menu -->
+        <div id="mobile-menu" class="hidden md:hidden">
+            <nav class="px-6 pt-2 pb-4 space-y-2">
+                <a href="#about" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">About</a>
+                <a href="#publications" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Publications</a>
+                <a href="#projects" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Projects</a>
+                <a href="#contact" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Contact</a>
+            </nav>
         </div>
-      </div>
-      <br><br>
+    </header>
 
-      <div class="section-title">
-        <h2>Background</h2>
-      </div>
-      <p style="text-align: justify;">
-      Hello there! Thanks for taking the time to visit my website. I hail from Navi Mumbai, India, and 
-      now call Seattle my home as I pursue my MS degree. My upbringing was blessed with supportive parents
-       who encouraged me to explore beyond academics. Playing the piano, painting, and my passion 
-       for football became integral parts of my life.  I cracked the IIT-JEE Advanced and got into Mechanical 
-       Engineering at the Indian Institute of Technology, Gandhinagar. As captain of the college soccer team, 
-       I represented the squad in state and national-level tournaments. Additionally, I was part of the college 
-       band, performing at various fests and arenas.  I was awarded the Institute's Silver Medal and Director's 
-       Silver Medal for outstanding performance in academics and all-round performance respectively.
-      </p>
-      <br>
+    <main class="container mx-auto px-6 pt-24">
 
-      <div class="section-title">
-        <h2>Research Journey</h2>
-      </div>
+        <!-- Home Section -->
+        <section id="home" class="min-h-screen flex items-center">
+            <div class="grid md:grid-cols-2 gap-12 items-center w-full">
+                <div class="text-center md:text-left">
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+                        Hello, I'm Rwik Rana.
+                    </h1>
+                     <h2 class="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300 mt-2">
+                        A Robotics <span id="role-text" class="text-orange-500"></span>
+                    </h2>
+                    <p class="mt-6 text-lg md:text-xl max-w-xl">
+                        I am a Ph.D. student at the University of Texas at Austin, working with Prof. Joydeep Biswas in the Autonomous Mobile Robotics Laboratory (AMRL).
+                    </p>
+                </div>
+                <div class="text-center">
+                    <img src="assets/img/rwik.png" alt="A portrait of Rwik Rana" class="rounded-full shadow-lg mx-auto border-4 border-gray-200 dark:border-gray-700 w-64 h-64 md:w-96 md:h-96 object-cover">
+                    <button class="open-modal mt-8 inline-block text-gray-800 dark:text-white font-bold py-3 px-8 rounded-lg border-2 border-gray-800 dark:border-gray-600 hover:underline transition-transform duration-300 transform hover:scale-105" data-modal="journey-modal">
+                        Know more about me
+                    </button>
+                </div>
+            </div>
+        </section>
 
-      <p style="text-align: justify;">
-        My research journey started at the Indian Institute of Technology, Gandhinagar (IIT Gn), 
-        with building an autonomous 1/10th scale race car to control at high speeds. We used a novel 
-        temporal shallow-deep neural network to detect roads, a genetic algorithm for local planning,
-         and PID to control the car. This helped me gain insights into the interplay of perception, 
-         planning, and control and led to my first publication "Memory Guided Road Detection". 
-         Concurrently, my involvement in the All-Terrain-Vehicle (ATV) building team for off-road 
-         terrains made me question the applicability of our on-road algorithms in off-road settings. 
-         This channelized my interest in robotics for unstructured environments. <br></p>
-
-        <p style="text-align: justify;">
-          At the University of Washington, Seattle (UW), under Prof. Byron Boots, I have been working in 
-        the perception team of DARPA RACER, which focuses on running ATVs in unstructured off-road 
-        terrains. Our team uses point-cloud data for semantic segmentation to determine the local map 
-        around the vehicle. Point-cloud data becomes sparse with distance, and the segmentation model 
-        is over-confident in the sparse regions. Thus, I added an aleatoric uncertainty module to quantify 
-        the model confidence to facilitate safer navigation. Sparser point-clouds also mean the risk of 
-        undetected objects, prompting us to use object detection techniques using camera images. However, 
-        their practicality is limited without post-processing steps like object tracking and temporal 
-        aggregation, leading me to develop a real-time multi-object tracker. RACER's reliance on multiple
-         LiDAR and camera sensors for advanced off-road navigation raises a key question for my Ph.D. 
-         research: “Is efficient locomotion and navigation with fewer sensors achievable?" Addressing 
-         this could reduce costs and power consumption, making robots more practical for real-world applications. <br></p>
+        <!-- About Section -->
+        <section id="about" class="py-20">
+             <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">About Me</h2>
+             <div class="max-w-4xl mx-auto">
+                 <p class="text-lg mb-4 text-center">
+                    My research focuses on the intersection of model-based control and model-free reinforcement learning. I develop algorithms to improve the performance and reliability of autonomous systems like drones and off-road vehicles, with a focus on trajectory tracking, control optimization, and perception.
+                </p>
+             </div>
+        </section>
         
-        <p style="text-align: justify;">
-          Working under Prof. Harish PM, at IITGn, in our journal article "Impact of Added Passive Compliance on the Performance 
-        of Tip-Actuated Flexible Manipulators" taught me the practical significance of the theoretical concepts from control 
-        theory. At UW, collaborating with Prof. Guanya Shi, I was introduced to Reinforcement Learning (RL) and Optimal 
-        Control / Model Predictive Control (MPC), deepening my appreciation for controls. In our paper "DATT : Deep Adaptive 
-        Trajectory Tracking for Quadrotor Control", we developed a novel model-free RL framework for tracking infeasible 
-        trajectories, adaptable to external conditions like wind and payload, on low-cost drones, showing a 54% improvement 
-        over MPC. Next, we identified the strengths and limitations of MPC and RL. This led us to think, "Why not blend both 
-        to leverage the robustness of model-based MPC and the adaptability of model-free RL?" Consequently, in the paper, 
-        "Deep Model Predictive Optimization", we showed that blending MPC with RL enables drones to perform high-precision 
-        tasks like agile flips. This gives me the promise that learning-based control enables robust and agile navigation 
-        on low-cost robots and has brought them closer to real-world applications.</p>
+        <!-- Publications Section -->
+        <section id="publications" class="py-20">
+            <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Publications & Patents</h2>
+            <div class="max-w-4xl mx-auto">
+                <div class="max-h-[40rem] overflow-y-auto pr-4 scrollbar-custom">
+                    <ul class="space-y-6">
+                        <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal1">OVerSeeC-Open-Vocabulary CostMap Generation from Satellite Images and Natural Language</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Rwik Rana, Jesse Quattrociocchi, Dongmyeong Lee, Christian Ellis, Amanda Adkins, Adam Uccello, Garrett Warnell, Joydeep Biswas</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">Robotics: Science and Systems 2025 Workshop on Resilient Off-road Autonomous Robotics</p>
+                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                        </li>
+                        <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal2">Deep Model Predictive Optimization</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Jacob Sacks, Rwik Rana, Kevin Huang, Alex Spitzer, Guanya Shi, and Byron Boots</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">International Conference for Robotics and Automation (ICRA 2024), CoRL Workshop 2023</p>
+                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                        </li>
+                        <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal3">DATT: Deep Adaptive Trajectory Tracking for Quadrotor Control</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Kevin Huang*, Rwik Rana*, Alex Spitzer, Guanya Shi, Byron Boots</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">Conference on Robot Learning (CoRL) 2023</p>
+                            <a href="https://openreview.net/forum?id=9a0332n72T" target="_blank" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                        </li>
+                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal4">FF-RRT*: A Sampling-Based Planner for Multirobot Global Formation Path Planning</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Suraj Borate, Rwik Rana, Praveen Venkatesh, Madhu Vadali</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">Journal of Mechanisms and Robotics</p>
+                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                        </li>
+                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal5">Impact of Added Passive Compliance on the Performance of Tip-actuated Flexible Manipulators</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Barat S, Rwik Rana, Sushrut Surve, Madhu Vadali, Harish J. Palanthandalam Madapusi</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">ASME Journal of Dynamic Systems, Measurement, and Control</p>
+                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                        </li>
+                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal6">Memory Guided Road Detection</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Rwik Rana*, Praveen Venkatesh*, Varun Jain*</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">21st International Conference on Image Analysis and Processing (ICIAP) 2021</p>
+                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                        </li>
+                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
+                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal7">An end-to-end optimization system to streamline meetings and study sessions</button></h3>
+                            <p class="text-gray-600 dark:text-gray-400">Rwik Rana*, Pranshu Kumar*, Dhruv Menon*, Prankush Agarwal*, Udit Bhatia</p>
+                            <p class="text-gray-500 dark:text-gray-500 italic">Indian Patent 202221002873</p>
+                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Patent Link &rarr;</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </section>
 
-    </div><!-- End About Me -->
-
-  </section><!-- End About Section -->
-
-  <!-- ======= Resume Section ======= -->
-  <section id="resume" class="resume">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Resume</h2>
-        <p>Check My Resume</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-6">
-          <h3 class="resume-title">Sumary</h3>
-          <div class="resume-item pb-0">
-            <h4>Alice Barkley</h4>
-            <p><em>Innovative and deadline-driven Graphic Designer with 3+ years of experience designing and developing user-centered digital/print marketing material from initial concept to final, polished deliverable.</em></p>
-            <p>
-            <ul>
-              <li>Portland par 127,Orlando, FL</li>
-              <li>(123) 456-7891</li>
-              <li>alice.barkley@example.com</li>
-            </ul>
+        <!-- Projects Section -->
+        <section id="projects" class="py-20">
+             <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Projects</h2>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://placehold.co/600x400/111827/6B7280?text=Deep+Car" alt="Deep Car Acrobatics Project" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Deep Car Acrobatics</h3>
+                        <p class="mb-4 flex-grow">Developing a forward prediction model for sampling-based planners to better handle complex vehicle dynamics, including air-borne maneuvers and collisions.</p>
+                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
+                    </div>
+                </div>
+                 <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://placehold.co/600x400/111827/6B7280?text=Off-Road+Nav" alt="Off-Road Navigation Project" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Off-Road Navigation (UT ARL)</h3>
+                        <p class="mb-4 flex-grow">Contributed to the OVerSeeC system, which generates costmaps from satellite imagery and natural language to assist global planning for off-road vehicles.</p>
+                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://placehold.co/600x400/111827/6B7280?text=DARPA+RACER" alt="DARPA RACER Project" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Fast Off-Road Navigation (DARPA RACER)</h3>
+                        <p class="mb-4 flex-grow">Worked on an uncertainty-aware semantic segmentation model (BEVNet) for high-speed off-road driving, which showed an 18% improvement in local planner performance.</p>
+                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
+                    </div>
+                </div>
+                 <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://placehold.co/600x400/111827/6B7280?text=Super+Tac+Sensor" alt="Tactile Sensor Super Resolution Project" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tactile Sensor Super Resolution</h3>
+                        <p class="mb-4 flex-grow">Designed a VAE-based spatio-temporal architecture to increase tactile sensor resolution by a factor of four.</p>
+                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://placehold.co/600x400/111827/6B7280?text=Road+Detection" alt="Memory Guided Road Detection" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Memory Guided Road Detection</h3>
+                        <p class="mb-4 flex-grow">Developed a road segmentation framework that balances accuracy and speed by interleaving feature extractors, resulting in a 3x inference speed-up.</p>
+                        <a href="#" class="font-bold hover:underline mt-auto">View Repository &rarr;</a>
+                    </div>
+                </div>
+                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://placehold.co/600x400/111827/6B7280?text=Autonomous+Car" alt="End-to-end control of autonomous cars" class="w-full h-48 object-cover">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">End-to-end Autonomous Racing</h3>
+                        <p class="mb-4 flex-grow">Designed an end-to-end racing algorithm for the CARLA simulator, using a VAE with a genetic algorithm for trajectory optimization.</p>
+                        <a href="#" class="font-bold hover:underline mt-auto">View on ArXiv &rarr;</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- Contact Section -->
+        <section id="contact" class="py-20">
+            <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-4">Get In Touch</h2>
+            <p class="text-center max-w-2xl mx-auto mb-12">
+                I'm always open to discussing new projects, creative ideas, or opportunities. Feel free to reach out.
             </p>
-          </div>
-
-          <h3 class="resume-title">Education</h3>
-          <div class="resume-item">
-            <h4>Master of Fine Arts &amp; Graphic Design</h4>
-            <h5>2015 - 2016</h5>
-            <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-            <p>Qui deserunt veniam. Et sed aliquam labore tempore sed quisquam iusto autem sit. Ea vero voluptatum qui ut dignissimos deleniti nerada porti sand markend</p>
-          </div>
-          <div class="resume-item">
-            <h4>Bachelor of Fine Arts &amp; Graphic Design</h4>
-            <h5>2010 - 2014</h5>
-            <p><em>Rochester Institute of Technology, Rochester, NY</em></p>
-            <p>Quia nobis sequi est occaecati aut. Repudiandae et iusto quae reiciendis et quis Eius vel ratione eius unde vitae rerum voluptates asperiores voluptatem Earum molestiae consequatur neque etlon sader mart dila</p>
-          </div>
+            <div class="text-center">
+                 <div class="relative inline-block">
+                    <input id="email-input" type="text" value="rwikrana@gmail.com" class="bg-gray-100 dark:bg-gray-800 text-lg text-center font-bold py-4 px-8 rounded-lg w-80" readonly>
+                    <button id="copy-email-button" class="absolute right-2 top-1/2 -translate-y-1/2 bg-gray-200 dark:bg-gray-700 text-gray-600 dark:text-white p-2 rounded-md hover:bg-gray-300 dark:hover:bg-gray-600 transition-colors" title="Copy to Clipboard">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+                          <path d="M7 9a2 2 0 012-2h6a2 2 0 012 2v6a2 2 0 01-2 2H9a2 2 0 01-2-2V9z" />
+                          <path d="M5 3a2 2 0 00-2 2v6a2 2 0 002 2V5h6a2 2 0 00-2-2H5z" />
+                        </svg>
+                    </button>
+                </div>
+                 <div id="copy-feedback" class="mt-2 text-sm text-green-500 dark:text-green-400 opacity-0 transition-opacity duration-300">
+                    Email copied to clipboard!
+                </div>
+                <div class="mt-8 flex justify-center gap-6">
+                    <a href="https://github.com/rwik2000" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path fill-rule="evenodd" d="M12 2C6.477 2 2 6.477 2 12c0 4.418 2.865 8.168 6.839 9.49.5.092.682-.217.682-.482 0-.237-.009-.868-.014-1.703-2.782.605-3.369-1.343-3.369-1.343-.454-1.158-1.11-1.466-1.11-1.466-.908-.62.069-.608.069-.608 1.003.07 1.531 1.032 1.531 1.032.892 1.53 2.341 1.088 2.91.832.092-.647.35-1.088.636-1.338-2.22-.253-4.555-1.113-4.555-4.951 0-1.093.39-1.988 1.031-2.688-.103-.253-.446-1.272.098-2.65 0 0 .84-.27 2.75 1.026A9.564 9.564 0 0112 6.844c.85.004 1.705.115 2.504.337 1.909-1.296 2.747-1.027 2.747-1.027.546 1.379.203 2.398.1 2.651.64.7 1.03 1.595 1.03 2.688 0 3.848-2.338 4.695-4.566 4.943.359.309.678.92.678 1.855 0 1.338-.012 2.419-.012 2.747 0 .268.18.58.688.482A10.001 10.001 0 0022 12c0-5.523-4.477-10-10-10z" clip-rule="evenodd" /></svg></a>
+                    <a href="https://www.linkedin.com/in/rwik-rana/" target="_blank" class="text-gray-500 dark:text-gray-400 hover:text-gray-800 dark:hover:text-white transition-colors"><svg class="w-8 h-8" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true"><path d="M21.25 2H2.75A.75.75 0 002 2.75v18.5c0 .414.336.75.75.75h18.5a.75.75 0 00.75-.75V2.75A.75.75 0 0021.25 2zM8.25 18.25h-2.5V9.75h2.5v8.5zM7 8.5a1.5 1.5 0 11-3 0 1.5 1.5 0 013 0zm11.5 9.75h-2.5v-4.5c0-1.06-.02-2.42-1.5-2.42-1.5 0-1.73 1.17-1.73 2.34v4.58h-2.5V9.75h2.4v1.1h.03c.34-.64 1.18-1.32 2.37-1.32 2.54 0 3 1.67 3 3.85v4.92z" /></svg></a>
+                </div>
+            </div>
+        </section>
+    </main>
+    
+    <!-- Modals -->
+    <div id="journey-modal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+        <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
+        <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-2xl mx-auto rounded shadow-lg z-50">
+            <div class="py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">My Journey</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg>
+                    </div>
+                </div>
+                <div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+                    <p class="text-lg mb-4">My academic journey began at the Indian Institute of Technology (IIT) Gandhinagar, where I received my B.Tech. in Mechanical Engineering with minors in Computer Science and Robotics. </p>
+                    <p class="text-lg mb-4">I then pursued my M.S. in Mechanical Engineering at the University of Washington, Seattle, working as a Research Assistant in the Robot Learning Lab with Prof. Byron Boots. This work included contributions to the DARPA RACER program.</p>
+                    <p class="text-lg">Currently, I am a Ph.D. student in Computer Science at the University of Texas at Austin, advised by Prof. Joydeep Biswas in the Autonomous Mobile Robotics Laboratory (AMRL).</p>
+                </div>
+                <div class="flex justify-end pt-2">
+                    <button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button>
+                </div>
+            </div>
         </div>
-        <div class="col-lg-6">
-          <h3 class="resume-title">Professional Experience</h3>
-          <div class="resume-item">
-            <h4>Senior graphic design specialist</h4>
-            <h5>2019 - Present</h5>
-            <p><em>Experion, New York, NY </em></p>
-            <p>
-            <ul>
-              <li>Lead in the design, development, and implementation of the graphic, layout, and production communication materials</li>
-              <li>Delegate tasks to the 7 members of the design team and provide counsel on all aspects of the project. </li>
-              <li>Supervise the assessment of all graphic materials in order to ensure quality and accuracy of the design</li>
-              <li>Oversee the efficient use of production project budgets ranging from $2,000 - $25,000</li>
-            </ul>
-            </p>
-          </div>
-          <div class="resume-item">
-            <h4>Graphic design specialist</h4>
-            <h5>2017 - 2018</h5>
-            <p><em>Stepping Stone Advertising, New York, NY</em></p>
-            <p>
-            <ul>
-              <li>Developed numerous marketing programs (logos, brochures,infographics, presentations, and advertisements).</li>
-              <li>Managed up to 5 projects or tasks at a given time while under pressure</li>
-              <li>Recommended and consulted with clients on the most appropriate graphic design</li>
-              <li>Created 4+ design presentations and proposals a month for clients and account managers</li>
-            </ul>
-            </p>
-          </div>
-        </div>
-      </div>
-
     </div>
-  </section><!-- End Resume Section -->
-
-  <!-- ======= Publication Section ======= -->
-  <section id="pubs" class="services">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Publications</h2>
-        <p>2023</p>
+    <div id="modal1" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+        <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
+        <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50">
+             <div class="py-4 text-left px-6">
+                <div class="flex justify-between items-center pb-3">
+                    <p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p>
+                    <div class="modal-close cursor-pointer z-50">
+                        <svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg>
+                    </div>
+                </div>
+                <div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+                    <p class="mb-4">Autonomous ground vehicles deployed in off-road settings need to reason about multiple mission-specific criteria (terrains, buildings, hazards, etc.) when planning long-range global routes. Advanced aerial imagery, captured from drones or satellite views, has the potential to provide rich prior information for such global planning. A key challenge in leveraging such aerial imagery, however, is in accommodating operator preferences without prior knowledge of the factors, terrains, or other entities that may be needed during deployment.</p>
+                    <p class="mb-4">To address these challenges, we propose OVerSeeC, a neuro-symbolic, modular, open-vocabulary, zero-shot costmap generation pipeline that produces costmaps directly from advanced aerial imagery --- guided by natural-language user preferences --- without requiring any domain-specific prior training. Our approach leverages: (1) a natural language-grounded semantic segmentation module (CLIPSeg) to produce coarse masks from text prompts; (2) a mask refiner (SAM with a lightweight rectifier) to complete and sharpen these semantic masks; and (3) a large language model (LLM) to interpret semantic entities from user preferences and generate a Python function that fuses semantic masks into a scalar, preference-aligned costmap.</p>
+                    <p class="mb-4">We empirically show that OVerSeeC (1) generates costmaps that align more closely with user preferences for global planning, achieving significantly lower rank-regret path integral scores than state-of-the-art baselines; (2) successfully generalizes to novel terrain classes specified in natural language preferences, even when these classes are absent from any supervised training ontology, effectively handling previously unseen object categories; (3) exhibits robust segmentation accuracy and planning performance under distribution shifts compared to supervised methods; and (4) human evaluation on unseen maps show that OVerSeeC produces trajectories that most closely match operator-drawn paths.</p>
+                </div>
+                <div class="flex justify-end pt-2">
+                    <button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button>
+                    <a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Add other modals similarly -->
+    <div id="modal2" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+      <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
+        <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50">
+          <div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3">
+            <p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p>
+            <div class="modal-close cursor-pointer z-50">
+              <svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+                <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+              </svg>
+            </div>
+          </div>
+          <div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+            <p>A major challenge in robotics is to design robust policies which enable complex and agile behaviors in the real world. On one end of the spectrum, we have model-free reinforcement learning (MFRL), which is incredibly flexible and general but often results in brittle policies. In contrast, model predictive control (MPC) continually re-plans at each time step to remain robust to perturbations and model inaccuracies. However, despite its real-world successes, MPC often under-performs the optimal strategy. This is due to model quality, myopic behavior from short planning horizons, and approximations due to computational constraints. And even with a perfect model and enough compute, MPC can get stuck in bad local optima, depending heavily on the quality of the optimization algorithm. To this end, we propose Deep Model Predictive Optimization (DMPO), which learns the inner-loop of an MPC optimization algorithm directly via experience, specifically tailored to the needs of the control problem. We evaluate DMPO on a real quadrotor agile trajectory tracking task, on which it improves performance over a baseline MPC algorithm for a given computational budget. It can outperform the best MPC algorithm by up to 27% with fewer samples and an end-to-end policy trained with MFRL by 19%. Moreover, because DMPO requires fewer samples, it can also achieve these benefits with 4.3× less memory. When we subject the quadrotor to turbulent wind fields with an attached drag plate, DMPO can adapt zero-shot while still outperforming all baselines.</p>
+          </div>
+          <div class="flex justify-end pt-2">
+            <button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button>
+            <a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a>
+          </div>
+        </div>
       </div>
+    </div>
 
-      <div class="row">
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="icon-box">
-            <!-- <div class="icon"><i class="bx bxl-dribbble"></i></div>
-             -->
-             <img src="assets/img/dmpo.png" class="img-fluid" alt="">
-             <h4><a>Deep Model Predictive Optimization</a></h4>
-             <p style="font-weight: bold; font-style: italic;">Jacob Sacks, Rwik Rana, Kevin Huang, Alex Spitzer, Guanya Shi, Byron Boots</p>
-            <p>Submitted to ICRA 2024</p>
-            <p>
-              <a target="_blank" href="https://arxiv.org/abs/2310.04590">[ArXiv]</a>
-              <a target="_blank" href="https://sites.google.com/uw.edu/dmpo">[Website]</a> 
-              <a target="_blank" href="http://Deployable@corl2023">[CoRL 2023 Workshop]</a>
-            </p>
+    
+    <div id="modal3" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+      <p>Precise arbitrary trajectory tracking for quadrotors is challenging due to unknown nonlinear dynamics, trajectory infeasibility, and actuation limits. To tackle these challenges, we present Deep Adaptive Trajectory Tracking (DATT), a learning-based approach that can precisely track arbitrary, potentially infeasible trajectories in the presence of large disturbances in the real world. DATT builds on a novel feedforward-feedback-adaptive control structure trained in simulation using reinforcement learning. When deployed on real hardware, DATT is augmented with a disturbance estimator using L1 adaptive control in closed-loop, without any fine-tuning. DATT significantly outperforms competitive adaptive nonlinear and model predictive controllers for both feasible smooth and infeasible trajectories in unsteady wind fields, including challenging scenarios where baselines completely fail. Moreover, DATT can efficiently run online with an inference time less than 3.2 ms, less than 1/4 of the adaptive nonlinear model predictive control baseline.</p>
+    </div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="https://openreview.net/forum?id=9a0332n72T" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
+    
+    
+    <div id="modal4" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+      <p>This article presents a collision-free global path planning approach for multirobot systems called flexible formation—rapidly exploring randomized trees* (FF-RRT*). The algorithm is based on RRT* and provides a flexible and efficient representation of the formation geometry independent of the number of robots. It is designed to generate optimal paths for multirobot systems in a five-dimensional configuration space comprising the formation centroid, orientation, and scaling. An affine transformation is used to convert the path in the configuration space to the workspace of the robots. The proposed method employs a new distance function that eliminates the need for tuning weights and a sampling scheme for scaling factors to avoid inter-robot collisions. FF-RRT* is experimentally demonstrated using nonholonomic wheeled mobile robots and is effective in planning the collective motion of the robots. Robots could collectively reach goals by squeezing through narrow gaps and splitting and merging around large obstacles.</p>
+    </div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
+    
+    <div id="modal5" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+      <p>With their inherent compliance, flexible manipulator systems (FMSs) are increasingly finding new applications, such as robotic surgeries requiring safe interaction with the environment. While force-controlled FMSs are desirable, an added passive, compliant element can enhance safety while preserving performance. This paper explores the effects of added compliance on tip-actuated FMSs. A detailed analysis compares the impacts of additional compliance, and comparisons are made with a baseline no-compliance case. It is observed that the series compliance provides added safety but with some compromise on performance and stability. In contrast, parallel compliance improves stability and performance without compromising safety in interaction. While similar insights have been well-understood in the context of rigid-link robots, it is interesting to observe that additional series compliance in tip-actuated flexible manipulators is undesirable, unlike for rigid-link robots.</p>
+    </div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
+    
+    <div id="modal6" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+      <p>In self-driving car applications, there is a requirement to predict the location of the road given an input RGB front-facing image. We propose a framework that utilizes an interleaving strategy of large and small feature extractors assisted via a propagating shared feature space allowing us to realize gains of over 2.5X in speed with a negligible loss in the accuracy of predictions. By utilizing the gist of previously observed frames, we train the network to predict the current road with greater accuracy and lesser deviation from previous frames.</p>
+    </div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
+    
+    <div id="modal7" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>This is a placeholder for the abstract. Please replace this with the actual abstract for the patent.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Patent Link</a></div></div></div></div>
+
+    <!-- Footer -->
+    <footer class="border-t border-gray-200 dark:border-gray-700 mt-20">
+        <div class="container mx-auto px-6 py-6 text-center text-gray-500 dark:text-gray-400">
+            <p>&copy; 2024 Rwik Rana. All Rights Reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Theme toggle logic
+        const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
+        const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
+        const themeToggleButton = document.getElementById('theme-toggle');
+
+        // Show the correct icon on page load
+        if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
+            themeToggleLightIcon.classList.remove('hidden');
+        } else {
+            themeToggleDarkIcon.classList.remove('hidden');
+        }
+
+        themeToggleButton.addEventListener('click', function() {
+            // toggle icons
+            themeToggleDarkIcon.classList.toggle('hidden');
+            themeToggleLightIcon.classList.toggle('hidden');
+
+            // if set via local storage previously
+            if (localStorage.getItem('color-theme')) {
+                if (localStorage.getItem('color-theme') === 'light') {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                } else {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                }
+            // if NOT set via local storage previously
+            } else {
+                if (document.documentElement.classList.contains('dark')) {
+                    document.documentElement.classList.remove('dark');
+                    localStorage.setItem('color-theme', 'light');
+                } else {
+                    document.documentElement.classList.add('dark');
+                    localStorage.setItem('color-theme', 'dark');
+                }
+            }
+        });
+
+        // Mobile Menu Toggle
+        const mobileMenuButton = document.getElementById('mobile-menu-button');
+        const mobileMenu = document.getElementById('mobile-menu');
+        mobileMenuButton.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Close mobile menu when a link is clicked
+        const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
+        for (let link of mobileMenuLinks) {
+            link.addEventListener('click', () => {
+                if(!mobileMenu.classList.contains('hidden')){
+                    mobileMenu.classList.add('hidden');
+                }
+            });
+        }
+
+        // Copy Email to Clipboard
+        const copyEmailButton = document.getElementById('copy-email-button');
+        const emailInput = document.getElementById('email-input');
+        const copyFeedback = document.getElementById('copy-feedback');
+
+        copyEmailButton.addEventListener('click', () => {
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = emailInput.value;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            try {
+                document.execCommand('copy');
+                copyFeedback.textContent = 'Email copied to clipboard!';
+                copyFeedback.classList.remove('text-red-500');
+                copyFeedback.classList.add('text-green-500');
+                copyFeedback.style.opacity = '1';
+                setTimeout(() => {
+                    copyFeedback.style.opacity = '0';
+                }, 2000);
+            } catch (err) {
+                console.error('Failed to copy text: ', err);
+                copyFeedback.textContent = 'Failed to copy!';
+                copyFeedback.classList.remove('text-green-500');
+                copyFeedback.classList.add('text-red-500');
+            }
+            document.body.removeChild(tempTextArea);
+        });
+        
+        // Modal logic
+        const openmodal = document.querySelectorAll('.open-modal')
+        for (var i = 0; i < openmodal.length; i++) {
+          openmodal[i].addEventListener('click', function(event){
+            event.preventDefault()
+            toggleModal(event.target.attributes['data-modal'].value)
+          })
+        }
+        
+        const overlay = document.querySelectorAll('.modal-overlay')
+        for (var i = 0; i < overlay.length; i++) {
+          overlay[i].addEventListener('click', function(event){
+            toggleModal()
+          })
+        }
+        
+        var closemodal = document.querySelectorAll('.modal-close')
+        for (var i = 0; i < closemodal.length; i++) {
+          closemodal[i].addEventListener('click', function(event){
+            toggleModal()
+          })
+        }
+        
+        document.onkeydown = function(evt) {
+          evt = evt || window.event
+          var isEscape = false
+          if ("key" in evt) {
+            isEscape = (evt.key === "Escape" || evt.key === "Esc")
+          } else {
+            isEscape = (evt.keyCode === 27)
+          }
+          if (isEscape && document.body.classList.contains('modal-active')) {
+            toggleModal()
+          }
+        };
+        
+        function toggleModal (modalID) {
+            const body = document.querySelector('body')
+            if(modalID){
+                const modal = document.getElementById(modalID)
+                modal.classList.toggle('opacity-0')
+                modal.classList.toggle('pointer-events-none')
+                body.classList.toggle('modal-active')
+            } else {
+                const modals = document.querySelectorAll('.modal');
+                for(var i = 0; i<modals.length; i++){
+                    if(!modals[i].classList.contains('opacity-0')){
+                        modals[i].classList.add('opacity-0');
+                        modals[i].classList.add('pointer-events-none');
+                    }
+                }
+                if (body.classList.contains('modal-active')) {
+                    body.classList.remove('modal-active');
+                }
+            }
+        }
+        
+        // Typing effect logic
+        const roles = ["Researcher", "Engineer"];
+        let roleIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const textElement = document.getElementById('role-text');
+        
+        function type() {
+            const currentRole = roles[roleIndex];
             
-          </div>
-        </div>
+            if (isDeleting) {
+                // Deleting
+                textElement.textContent = currentRole.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                // Typing
+                textElement.textContent = currentRole.substring(0, charIndex + 1);
+                charIndex++;
+            }
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-md-0">
-          <div class="icon-box">
-            <!-- <div class="icon"><i class="bx bx-file"></i></div>
-             -->
-             <img src="assets/img/star_ppo_pid_mppi_L1.gif" class="img-fluid" alt="">
-             <h4><a>DATT: Deep Adaptive Trajectory Tracking for Quadrotor Control</a></h4>
-             <p style="font-weight: bold; font-style: italic;">Kevin Huang, Rwik Rana, Alexander Spitzer, Guanya Shi, Byron Boots</p>
-            <p>Proceedings of The 7th Conference on Robot Learning</p>
-            <p>
-               <a target="_blank" href="https://proceedings.mlr.press/v229/huang23a.html">[PMLR]</a>
-               <a target="_blank" href="https://arxiv.org/pdf/2310.09053.pdf">[ArXiv]</a>
-               <a target="_blank" href="https://sites.google.com/view/deep-adaptive-traj-tracking/home">[Website]</a>
-            </p>
-          </div>
-        </div>
+            // If word is fully typed
+            if (!isDeleting && charIndex === currentRole.length) {
+                isDeleting = true;
+                setTimeout(type, 3000); // Pause at end of word
+            } 
+            // If word is fully deleted
+            else if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                roleIndex = (roleIndex + 1) % roles.length;
+                setTimeout(type, 500); // Pause before typing new word
+            } 
+            else {
+                const typingSpeed = isDeleting ? 100 : 200;
+                setTimeout(type, typingSpeed);
+            }
+        }
 
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch mt-4 mt-lg-0">
-          <div class="icon-box">
-            <!-- <div class="icon"><i class="bx bx-tachometer"></i></div>
-             -->
-            <img src="assets/img/2R_setup.png" class="img-fluid" alt="">
-            <h4><a>Impact of Added Passive Compliance on the Performance of Tip-Actuated Flexible Manipulators</a></h4>
-            <p style="font-weight: bold; font-style: italic;">Barat S., Sushrut Surve, Rwik Rana, Madhu Vadali, Harish J. Palanthandalam-Madapusi</p>
-            <p>ASME Journal of Dynamic Systems, Measurement, and Control</p>
-            <p>
-              <a target="_blank" href="https://asmedigitalcollection.asme.org/dynamicsystems/issue/145/12">[Journal]</a>
-            </p>
-          </div>
-        </div>
-
-        <div class="section-title">
-          <p>2022</p>
-        </div>
-
-        <div class="col-lg-4 col-md-6 d-flex align-items-stretch">
-          <div class="icon-box">
-             <img src="assets/img/resnet101.gif" class="img-fluid" alt="">
-             <h4><a>Memory Guided Road Detection</a></h4>
-             <p style="font-weight: bold; font-style: italic;">Rwik Rana, Praveen Venkatesh, Varun Jain</p>
-            <p>International Conference Image Analysis and Processing (ICIAP) 2022, Lecce, Italy</p>
-            <p>
-              <a target="_blank" href="https://arxiv.org/abs/2106.14184">[ArXiv]</a>
-              <a target="_blank" href="https://link.springer.com/chapter/10.1007/978-3-031-06427-2_63">[Springer]</a>
-            </p>
-            
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Services Section -->
-
-  <!-- ======= Portfolio Section ======= -->
-  <section id="portfolio" class="portfolio">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Portfolio</h2>
-        <p>My Works</p>
-      </div>
-
-      <div class="row">
-        <div class="col-lg-12 d-flex justify-content-center">
-          <ul id="portfolio-flters">
-            <li data-filter="*" class="filter-active">All</li>
-            <li data-filter=".filter-app">App</li>
-            <li data-filter=".filter-card">Card</li>
-            <li data-filter=".filter-web">Web</li>
-          </ul>
-        </div>
-      </div>
-
-      <div class="row portfolio-container">
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-1.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 1</h4>
-              <p>App</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-1.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-2.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-2.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-3.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 2</h4>
-              <p>App</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-3.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-4.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 2</h4>
-              <p>Card</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-4.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-5.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 2</h4>
-              <p>Web</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-5.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 2"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-app">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-6.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>App 3</h4>
-              <p>App</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-6.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="App 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-7.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 1</h4>
-              <p>Card</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-7.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 1"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-card">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-8.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Card 3</h4>
-              <p>Card</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-8.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Card 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-lg-4 col-md-6 portfolio-item filter-web">
-          <div class="portfolio-wrap">
-            <img src="assets/img/portfolio/portfolio-9.jpg" class="img-fluid" alt="">
-            <div class="portfolio-info">
-              <h4>Web 3</h4>
-              <p>Web</p>
-              <div class="portfolio-links">
-                <a href="assets/img/portfolio/portfolio-9.jpg" data-gallery="portfolioGallery" class="portfolio-lightbox" title="Web 3"><i class="bx bx-plus"></i></a>
-                <a href="portfolio-details.html" data-gallery="portfolioDetailsGallery" data-glightbox="type: external" class="portfolio-details-lightbox" title="Portfolio Details"><i class="bx bx-link"></i></a>
-              </div>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-    </div>
-  </section><!-- End Portfolio Section -->
-
-  <!-- ======= Contact Section ======= -->
-  <section id="contact" class="contact">
-    <div class="container">
-
-      <div class="section-title">
-        <h2>Contact</h2>
-        <p>Contact Me</p>
-      </div>
-
-      <div class="row mt-2">
-
-        <div class="col-md-6 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-map"></i>
-            <h3>My Address</h3>
-            <p>A108 Adam Street, New York, NY 535022</p>
-          </div>
-        </div>
-
-        <div class="col-md-6 mt-4 mt-md-0 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-share-alt"></i>
-            <h3>Social Profiles</h3>
-            <div class="social-links">
-              <a href="#" class="twitter"><i class="bi bi-twitter"></i></a>
-              <a href="#" class="facebook"><i class="bi bi-facebook"></i></a>
-              <a href="#" class="instagram"><i class="bi bi-instagram"></i></a>
-              <a href="#" class="google-plus"><i class="bi bi-skype"></i></a>
-              <a href="#" class="linkedin"><i class="bi bi-linkedin"></i></a>
-            </div>
-          </div>
-        </div>
-
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-envelope"></i>
-            <h3>Email Me</h3>
-            <p>contact@example.com</p>
-          </div>
-        </div>
-        <div class="col-md-6 mt-4 d-flex align-items-stretch">
-          <div class="info-box">
-            <i class="bx bx-phone-call"></i>
-            <h3>Call Me</h3>
-            <p>+1 5589 55488 55</p>
-          </div>
-        </div>
-      </div>
-
-      <form action="forms/contact.php" method="post" role="form" class="php-email-form mt-4">
-        <div class="row">
-          <div class="col-md-6 form-group">
-            <input type="text" name="name" class="form-control" id="name" placeholder="Your Name" required>
-          </div>
-          <div class="col-md-6 form-group mt-3 mt-md-0">
-            <input type="email" class="form-control" name="email" id="email" placeholder="Your Email" required>
-          </div>
-        </div>
-        <div class="form-group mt-3">
-          <input type="text" class="form-control" name="subject" id="subject" placeholder="Subject" required>
-        </div>
-        <div class="form-group mt-3">
-          <textarea class="form-control" name="message" rows="5" placeholder="Message" required></textarea>
-        </div>
-        <div class="my-3">
-          <div class="loading">Loading</div>
-          <div class="error-message"></div>
-          <div class="sent-message">Your message has been sent. Thank you!</div>
-        </div>
-        <div class="text-center"><button type="submit">Send Message</button></div>
-      </form>
-
-    </div>
-  </section><!-- End Contact Section -->
-
-  <div class="credits">
-    <!-- All the links in the footer should remain intact. -->
-    <!-- You can delete the links only if you purchased the pro version. -->
-    <!-- Licensing information: https://bootstrapmade.com/license/ -->
-    <!-- Purchase the pro version with working PHP/AJAX contact form: https://bootstrapmade.com/personal-free-resume-bootstrap-template/ -->
-    Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
-  </div>
-
-  <!-- Vendor JS Files -->
-  <script src="assets/vendor/purecounter/purecounter_vanilla.js"></script>
-  <script src="assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-  <script src="assets/vendor/glightbox/js/glightbox.min.js"></script>
-  <script src="assets/vendor/isotope-layout/isotope.pkgd.min.js"></script>
-  <script src="assets/vendor/swiper/swiper-bundle.min.js"></script>
-  <script src="assets/vendor/waypoints/noframework.waypoints.js"></script>
-  <script src="assets/vendor/php-email-form/validate.js"></script>
-
-  <!-- Template Main JS File -->
-  <script src="assets/js/main.js"></script>
-
+        document.addEventListener('DOMContentLoaded', function() {
+            if(textElement) {
+                setTimeout(type, 500); // Start typing after a short delay
+            }
+        });
+    </script>
 </body>
-
 </html>
