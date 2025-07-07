@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Rwik Rana - Robotics Portfolio</title>
+    <title>Rwik Rana</title>
     
     <!-- Tailwind CSS -->
     <script src="https://cdn.tailwindcss.com"></script>
@@ -48,28 +48,20 @@
         .dark .scrollbar-custom::-webkit-scrollbar-thumb:hover {
              background: #6b7280; /* gray-500 */
         }
-
-        /* Typing animation */
-        .typewriter span {
+        /* Typing Animation */
+        .typewriter-cursor {
             display: inline-block;
-            overflow: hidden;
-            border-right: .15em solid orange; /* The cursor */
-            white-space: nowrap;
-            margin: 0 auto;
-            letter-spacing: .1em;
-            animation: 
-                typing 3.5s steps(30, end) infinite,
-                blink-caret .75s step-end infinite;
+            background-color: #f97316; /* orange-500 */
+            width: 3px;
+            animation: blink 1s infinite;
+            margin-left: 2px;
         }
-
-        @keyframes typing {
-            from, to { width: 0 }
-            40%, 60% { width: 100% }
-        }
-
-        @keyframes blink-caret {
-            from, to { border-color: transparent }
-            50% { border-color: orange; }
+        @keyframes blink {
+            0% { background-color: #f97316; }
+            49% { background-color: #f97316; }
+            50% { background-color: transparent; }
+            99% { background-color: transparent; }
+            100% { background-color: #f97316; }
         }
     </style>
     <script>
@@ -89,7 +81,7 @@
             <a href="#home" class="text-2xl font-bold text-gray-900 dark:text-white">Rwik Rana</a>
             <nav class="hidden md:flex items-center space-x-8">
                 <a href="#about" class="hover:underline">About</a>
-                <a href="#publications" class="hover:underline">Publications</a>
+                <a href="#updates" class="hover:underline">Updates</a>
                 <a href="#projects" class="hover:underline">Projects</a>
                 <a href="#contact" class="hover:underline">Contact</a>
                  <button id="theme-toggle" type="button" class="text-gray-500 dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 rounded-lg text-sm p-2.5">
@@ -105,7 +97,7 @@
         <div id="mobile-menu" class="hidden md:hidden">
             <nav class="px-6 pt-2 pb-4 space-y-2">
                 <a href="#about" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">About</a>
-                <a href="#publications" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Publications</a>
+                <a href="#updates" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Updates</a>
                 <a href="#projects" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Projects</a>
                 <a href="#contact" class="block text-center hover:bg-gray-100 dark:hover:bg-gray-800 rounded-md py-2">Contact</a>
             </nav>
@@ -119,17 +111,23 @@
             <div class="grid md:grid-cols-2 gap-12 items-center w-full">
                 <div class="text-center md:text-left">
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
-                        Hello, I'm Rwik Rana.
+                        Hello,
                     </h1>
-                     <h2 class="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300 mt-2">
-                        A Robotics <span id="role-text" class="text-orange-500"></span>
+                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+                        I'm Rwik Rana.
+                    </h1>
+                     <h2 class="text-3xl md:text-4xl font-bold text-gray-700 dark:text-gray-300 mt-2 h-12">
+                        A Robotics <span id="role-text" class="text-orange-500"></span><span class="typewriter-cursor">&nbsp;</span>
                     </h2>
                     <p class="mt-6 text-lg md:text-xl max-w-xl">
                         I am a Ph.D. student at the University of Texas at Austin, working with Prof. Joydeep Biswas in the Autonomous Mobile Robotics Laboratory (AMRL).
                     </p>
+                    <p class="mt-6 text-lg md:text-xl max-w-xl">
+                    My research focuses on the intersection of model-based control and model-free reinforcement learning. I develop algorithms to improve the performance and reliability of autonomous systems like drones and off-road vehicles, with a focus on trajectory tracking, control optimization, and perception.
+                    </p>
                 </div>
                 <div class="text-center">
-                    <img src="assets/img/rwik.png" alt="A portrait of Rwik Rana" class="rounded-full shadow-lg mx-auto border-4 border-gray-200 dark:border-gray-700 w-64 h-64 md:w-96 md:h-96 object-cover">
+                    <img src="assets/img/rwik.png" alt="myself" class="rounded-full shadow-lg mx-auto border-4 border-gray-200 dark:border-gray-700 w-64 h-64 md:w-96 md:h-96 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/384x384/1f2937/ffffff?text=RR';">
                     <button class="open-modal mt-8 inline-block text-gray-800 dark:text-white font-bold py-3 px-8 rounded-lg border-2 border-gray-800 dark:border-gray-600 hover:underline transition-transform duration-300 transform hover:scale-105" data-modal="journey-modal">
                         Know more about me
                     </button>
@@ -137,7 +135,7 @@
             </div>
         </section>
 
-        <!-- About Section -->
+        <!-- About Section
         <section id="about" class="py-20">
              <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">About Me</h2>
              <div class="max-w-4xl mx-auto">
@@ -145,113 +143,39 @@
                     My research focuses on the intersection of model-based control and model-free reinforcement learning. I develop algorithms to improve the performance and reliability of autonomous systems like drones and off-road vehicles, with a focus on trajectory tracking, control optimization, and perception.
                 </p>
              </div>
-        </section>
+        </section> -->
         
-        <!-- Publications Section -->
-        <section id="publications" class="py-20">
-            <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Publications & Patents</h2>
-            <div class="max-w-4xl mx-auto">
-                <div class="max-h-[40rem] overflow-y-auto pr-4 scrollbar-custom">
-                    <ul class="space-y-6">
-                        <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal1">OVerSeeC-Open-Vocabulary CostMap Generation from Satellite Images and Natural Language</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Rwik Rana, Jesse Quattrociocchi, Dongmyeong Lee, Christian Ellis, Amanda Adkins, Adam Uccello, Garrett Warnell, Joydeep Biswas</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">Robotics: Science and Systems 2025 Workshop on Resilient Off-road Autonomous Robotics</p>
-                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
-                        </li>
-                        <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal2">Deep Model Predictive Optimization</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Jacob Sacks, Rwik Rana, Kevin Huang, Alex Spitzer, Guanya Shi, and Byron Boots</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">International Conference for Robotics and Automation (ICRA 2024), CoRL Workshop 2023</p>
-                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
-                        </li>
-                        <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal3">DATT: Deep Adaptive Trajectory Tracking for Quadrotor Control</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Kevin Huang*, Rwik Rana*, Alex Spitzer, Guanya Shi, Byron Boots</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">Conference on Robot Learning (CoRL) 2023</p>
-                            <a href="https://openreview.net/forum?id=9a0332n72T" target="_blank" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
-                        </li>
-                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal4">FF-RRT*: A Sampling-Based Planner for Multirobot Global Formation Path Planning</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Suraj Borate, Rwik Rana, Praveen Venkatesh, Madhu Vadali</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">Journal of Mechanisms and Robotics</p>
-                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
-                        </li>
-                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal5">Impact of Added Passive Compliance on the Performance of Tip-actuated Flexible Manipulators</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Barat S, Rwik Rana, Sushrut Surve, Madhu Vadali, Harish J. Palanthandalam Madapusi</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">ASME Journal of Dynamic Systems, Measurement, and Control</p>
-                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
-                        </li>
-                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal6">Memory Guided Road Detection</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Rwik Rana*, Praveen Venkatesh*, Varun Jain*</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">21st International Conference on Image Analysis and Processing (ICIAP) 2021</p>
-                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
-                        </li>
-                         <li class="bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700">
-                            <h3 class="text-xl font-bold text-gray-900 dark:text-white"><button class="open-modal hover:underline" data-modal="modal7">An end-to-end optimization system to streamline meetings and study sessions</button></h3>
-                            <p class="text-gray-600 dark:text-gray-400">Rwik Rana*, Pranshu Kumar*, Dhruv Menon*, Prankush Agarwal*, Udit Bhatia</p>
-                            <p class="text-gray-500 dark:text-gray-500 italic">Indian Patent 202221002873</p>
-                            <a href="#" class="font-bold hover:underline text-sm mt-2 inline-block">Patent Link &rarr;</a>
-                        </li>
-                    </ul>
+        <!-- Updates Section (Publications & News) -->
+        <section id="updates" class="py-20">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
+                <!-- Column 1: Publications -->
+                <div>
+                    <h2 class="text-4xl font-bold text-center lg:text-left text-gray-900 dark:text-white mb-12">Publications & Patents</h2>
+                    <div class="max-h-[40rem] overflow-y-auto pr-4 scrollbar-custom bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                        <ul id="publications-list" class="space-y-6">
+                            <li id="publications-loading" class="text-center py-8">Loading publications...</li>
+                        </ul>
+                    </div>
+                </div>
+                <!-- Column 2: News -->
+                <div>
+                    <h2 class="text-4xl font-bold text-center lg:text-left text-gray-900 dark:text-white mb-12">News</h2>
+                    <div class="max-h-[40rem] overflow-y-auto pr-4 scrollbar-custom bg-white dark:bg-gray-900/50 border border-gray-200 dark:border-gray-700 rounded-lg p-4">
+                        <ul id="news-list" class="space-y-6">
+                            <li id="news-loading" class="text-center py-8">Loading news...</li>
+                        </ul>
+                    </div>
                 </div>
             </div>
         </section>
 
+
         <!-- Projects Section -->
         <section id="projects" class="py-20">
              <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Projects</h2>
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://placehold.co/600x400/111827/6B7280?text=Deep+Car" alt="Deep Car Acrobatics Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Deep Car Acrobatics</h3>
-                        <p class="mb-4 flex-grow">Developing a forward prediction model for sampling-based planners to better handle complex vehicle dynamics, including air-borne maneuvers and collisions.</p>
-                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
-                    </div>
-                </div>
-                 <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://placehold.co/600x400/111827/6B7280?text=Off-Road+Nav" alt="Off-Road Navigation Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Off-Road Navigation (UT ARL)</h3>
-                        <p class="mb-4 flex-grow">Contributed to the OVerSeeC system, which generates costmaps from satellite imagery and natural language to assist global planning for off-road vehicles.</p>
-                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://placehold.co/600x400/111827/6B7280?text=DARPA+RACER" alt="DARPA RACER Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Fast Off-Road Navigation (DARPA RACER)</h3>
-                        <p class="mb-4 flex-grow">Worked on an uncertainty-aware semantic segmentation model (BEVNet) for high-speed off-road driving, which showed an 18% improvement in local planner performance.</p>
-                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
-                    </div>
-                </div>
-                 <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://placehold.co/600x400/111827/6B7280?text=Super+Tac+Sensor" alt="Tactile Sensor Super Resolution Project" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Tactile Sensor Super Resolution</h3>
-                        <p class="mb-4 flex-grow">Designed a VAE-based spatio-temporal architecture to increase tactile sensor resolution by a factor of four.</p>
-                        <a href="#" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://placehold.co/600x400/111827/6B7280?text=Road+Detection" alt="Memory Guided Road Detection" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">Memory Guided Road Detection</h3>
-                        <p class="mb-4 flex-grow">Developed a road segmentation framework that balances accuracy and speed by interleaving feature extractors, resulting in a 3x inference speed-up.</p>
-                        <a href="#" class="font-bold hover:underline mt-auto">View Repository &rarr;</a>
-                    </div>
-                </div>
-                <div class="bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://placehold.co/600x400/111827/6B7280?text=Autonomous+Car" alt="End-to-end control of autonomous cars" class="w-full h-48 object-cover">
-                    <div class="p-6 flex flex-col flex-grow">
-                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">End-to-end Autonomous Racing</h3>
-                        <p class="mb-4 flex-grow">Designed an end-to-end racing algorithm for the CARLA simulator, using a VAE with a genetic algorithm for trajectory optimization.</p>
-                        <a href="#" class="font-bold hover:underline mt-auto">View on ArXiv &rarr;</a>
-                    </div>
-                </div>
+             <!-- Projects will be dynamically inserted here -->
+            <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+               <p id="projects-loading" class="text-center col-span-full py-8">Loading projects...</p>
             </div>
         </section>
         
@@ -283,6 +207,7 @@
     </main>
     
     <!-- Modals -->
+    <!-- Static Modals -->
     <div id="journey-modal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
         <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
         <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-2xl mx-auto rounded shadow-lg z-50">
@@ -304,35 +229,10 @@
             </div>
         </div>
     </div>
-    <div id="modal1" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
-        <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
-        <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50">
-             <div class="py-4 text-left px-6">
-                <div class="flex justify-between items-center pb-3">
-                    <p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p>
-                    <div class="modal-close cursor-pointer z-50">
-                        <svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg>
-                    </div>
-                </div>
-                <div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
-                    <p class="mb-4">Autonomous ground vehicles deployed in off-road settings need to reason about multiple mission-specific criteria (terrains, buildings, hazards, etc.) when planning long-range global routes. Advanced aerial imagery, captured from drones or satellite views, has the potential to provide rich prior information for such global planning. A key challenge in leveraging such aerial imagery, however, is in accommodating operator preferences without prior knowledge of the factors, terrains, or other entities that may be needed during deployment.</p>
-                    <p class="mb-4">To address these challenges, we propose OVerSeeC, a neuro-symbolic, modular, open-vocabulary, zero-shot costmap generation pipeline that produces costmaps directly from advanced aerial imagery --- guided by natural-language user preferences --- without requiring any domain-specific prior training. Our approach leverages: (1) a natural language-grounded semantic segmentation module (CLIPSeg) to produce coarse masks from text prompts; (2) a mask refiner (SAM with a lightweight rectifier) to complete and sharpen these semantic masks; and (3) a large language model (LLM) to interpret semantic entities from user preferences and generate a Python function that fuses semantic masks into a scalar, preference-aligned costmap.</p>
-                    <p class="mb-4">We empirically show that OVerSeeC (1) generates costmaps that align more closely with user preferences for global planning, achieving significantly lower rank-regret path integral scores than state-of-the-art baselines; (2) successfully generalizes to novel terrain classes specified in natural language preferences, even when these classes are absent from any supervised training ontology, effectively handling previously unseen object categories; (3) exhibits robust segmentation accuracy and planning performance under distribution shifts compared to supervised methods; and (4) human evaluation on unseen maps show that OVerSeeC produces trajectories that most closely match operator-drawn paths.</p>
-                </div>
-                <div class="flex justify-end pt-2">
-                    <button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button>
-                    <a href="https://openreview.net/pdf?id=H6jEME4PpM" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a>
-                </div>
-            </div>
-        </div>
-    </div>
-    <!-- Add other modals similarly -->
-    <div id="modal2" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>A major challenge in robotics is to design robust policies which enable complex and agile behaviors in the real world. On one end of the spectrum, we have model-free reinforcement learning (MFRL), which is incredibly flexible and general but often results in brittle policies. In contrast, model predictive control (MPC) continually re-plans at each time step to remain robust to perturbations and model inaccuracies. However, despite its real-world successes, MPC often under-performs the optimal strategy. This is due to model quality, myopic behavior from short planning horizons, and approximations due to computational constraints. And even with a perfect model and enough compute, MPC can get stuck in bad local optima, depending heavily on the quality of the optimization algorithm. To this end, we propose Deep Model Predictive Optimization (DMPO), which learns the inner-loop of an MPC optimization algorithm directly via experience, specifically tailored to the needs of the control problem. We evaluate DMPO on a real quadrotor agile trajectory tracking task, on which it improves performance over a baseline MPC algorithm for a given computational budget. It can outperform the best MPC algorithm by up to 27% with fewer samples and an end-to-end policy trained with MFRL by 19%. Moreover, because DMPO requires fewer samples, it can also achieve these benefits with 4.3× less memory. When we subject the quadrotor to turbulent wind fields with an attached drag plate, DMPO can adapt zero-shot while still outperforming all baselines.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="https://ieeexplore.ieee.org/abstract/document/10611492" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
-    <div id="modal3" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>Precise arbitrary trajectory tracking for quadrotors is challenging due to unknown nonlinear dynamics, trajectory infeasibility, and actuation limits. To tackle these challenges, we present Deep Adaptive Trajectory Tracking (DATT), a learning-based approach that can precisely track arbitrary, potentially infeasible trajectories in the presence of large disturbances in the real world. DATT builds on a novel feedforward-feedback-adaptive control structure trained in simulation using reinforcement learning. When deployed on real hardware, DATT is augmented with a disturbance estimator using L1 adaptive control in closed-loop, without any fine-tuning. DATT significantly outperforms competitive adaptive nonlinear and model predictive controllers for both feasible smooth and infeasible trajectories in unsteady wind fields, including challenging scenarios where baselines completely fail. Moreover, DATT can efficiently run online with an inference time less than 3.2 ms, less than 1/4 of the adaptive nonlinear model predictive control baseline.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="https://proceedings.mlr.press/v229/huang23a.html" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
-    <div id="modal4" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>This article presents a collision-free global path planning approach for multirobot systems called flexible formation—rapidly exploring randomized trees* (FF-RRT*). The algorithm is based on RRT* and provides a flexible and efficient representation of the formation geometry independent of the number of robots. It is designed to generate optimal paths for multirobot systems in a five-dimensional configuration space comprising the formation centroid, orientation, and scaling. An affine transformation is used to convert the path in the configuration space to the workspace of the robots. The proposed method employs a new distance function that eliminates the need for tuning weights and a sampling scheme for scaling factors to avoid inter-robot collisions. FF-RRT* is experimentally demonstrated using nonholonomic wheeled mobile robots and is effective in planning the collective motion of the robots. Robots could collectively reach goals by squeezing through narrow gaps and splitting and merging around large obstacles.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="https://asmedigitalcollection.asme.org/mechanismsrobotics/article/16/10/104502/1201945" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
-    <div id="modal5" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>With their inherent compliance, flexible manipulator systems (FMSs) are increasingly finding new applications, such as robotic surgeries requiring safe interaction with the environment. While force-controlled FMSs are desirable, an added passive, compliant element can enhance safety while preserving performance. This paper explores the effects of added compliance on tip-actuated FMSs. A detailed analysis compares the impacts of additional compliance, and comparisons are made with a baseline no-compliance case. It is observed that the series compliance provides added safety but with some compromise on performance and stability. In contrast, parallel compliance improves stability and performance without compromising safety in interaction. While similar insights have been well-understood in the context of rigid-link robots, it is interesting to observe that additional series compliance in tip-actuated flexible manipulators is undesirable, unlike for rigid-link robots.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="https://asmedigitalcollection.asme.org/dynamicsystems/article/145/12/121003/1167495"  target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
-    <div id="modal6" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>In self-driving car applications, there is a requirement to predict the location of the road given an input RGB front-facing image. We propose a framework that utilizes an interleaving strategy of large and small feature extractors assisted via a propagating shared feature space allowing us to realize gains of over 2.5X in speed with a negligible loss in the accuracy of predictions. By utilizing the gist of previously observed frames, we train the network to predict the current road with greater accuracy and lesser deviation from previous frames.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="https://link.springer.com/chapter/10.1007/978-3-031-06427-2_63" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a></div></div></div></div>
-    <div id="modal7" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center"><div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div><div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50"><div class="py-4 text-left px-6"><div class="flex justify-between items-center pb-3"><p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p><div class="modal-close cursor-pointer z-50"><svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg></div></div><div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2"><p>This is a placeholder for the abstract. Please replace this with the actual abstract for the patent.</p></div><div class="flex justify-end pt-2"><button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button><a href="#" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Patent Link</a></div></div></div></div>
+
+    <!-- Dynamic Modals Container -->
+    <div id="dynamic-modals-container"></div>
+
 
     <!-- Footer -->
     <footer class="border-t border-gray-200 dark:border-gray-700 mt-20">
@@ -342,24 +242,255 @@
     </footer>
 
     <script>
-        // Theme toggle logic
+        // --- GOOGLE SHEETS INTEGRATION ---
+        
+        // INSTRUCTIONS:
+        // 1. Create a Google Sheet with three tabs: "Publications", "Projects", and "News".
+        // 2. In EACH tab, the first row MUST be the header row.
+        //    - Publications: title, authors, venue, link, abstract
+        //    - Projects: title, description, image_url, link
+        //    - News: date, update
+        // 3. To add a line break (new paragraph), type `\n` directly into the cell. Do NOT use Ctrl+Enter.
+        // 4. Go to File > Share > Publish to web.
+        // 5. In the dialog, for EACH tab:
+        //    - Select the specific tab (e.g., "Publications").
+        //    - Select "Comma-separated values (.csv)".
+        //    - Click "Publish" and copy the generated URL.
+        // 6. Find the `gid=` number in each URL. This is the unique ID for that tab.
+        // 7. Paste the full URLs for your tabs below.
+        
+        const PUBLICATIONS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=0&single=true&output=csv';
+        const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=2102024018&single=true&output=csv';
+        const NEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=262204434&single=true&output=csv';
+
+        document.addEventListener('DOMContentLoaded', () => {
+            fetchPublications();
+            fetchProjects();
+            fetchNews();
+            typewriter(); // Start the typewriter effect
+        });
+
+        async function fetchNews() {
+            const loadingElement = document.getElementById('news-loading');
+            try {
+                const response = await fetch(NEWS_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const csvText = await response.text();
+                const newsItems = parseCSV(csvText);
+                renderNews(newsItems);
+            } catch (error) {
+                console.error("Error fetching news:", error);
+                if (loadingElement) {
+                    loadingElement.textContent = 'Failed to load news.';
+                }
+            }
+        }
+
+        async function fetchPublications() {
+            const loadingElement = document.getElementById('publications-loading');
+            try {
+                const response = await fetch(PUBLICATIONS_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const csvText = await response.text();
+                const publications = parseCSV(csvText);
+                renderPublications(publications);
+                initializeModalEventListeners(); // Re-init listeners after rendering
+            } catch (error) {
+                console.error("Error fetching publications:", error);
+                if (loadingElement) {
+                    loadingElement.textContent = 'Failed to load publications.';
+                }
+            }
+        }
+
+        async function fetchProjects() {
+            const loadingElement = document.getElementById('projects-loading');
+            try {
+                const response = await fetch(PROJECTS_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const csvText = await response.text();
+                const projects = parseCSV(csvText);
+                renderProjects(projects);
+            } catch (error) {
+                console.error("Error fetching projects:", error);
+                if (loadingElement) {
+                   loadingElement.textContent = 'Failed to load projects.';
+                }
+            }
+        }
+
+        function parseCSV(text) {
+            const regex = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
+            const lines = text.split(/\r?\n/);
+            if (lines.length < 2) return [];
+            const headers = lines.shift().split(regex).map(h => h.trim().replace(/"/g, ''));
+            const result = [];
+            lines.forEach(line => {
+                if (!line.trim()) return;
+                const obj = {};
+                const values = line.split(regex);
+                headers.forEach((header, i) => {
+                    obj[header] = values[i] ? values[i].replace(/^"|"$/g, '').trim() : '';
+                });
+                result.push(obj);
+            });
+            return result;
+        }
+
+        function renderNews(newsItems) {
+            const listContainer = document.getElementById('news-list');
+            if (!listContainer) return;
+
+            if (newsItems.length === 0) {
+                listContainer.innerHTML = '<li class="text-center py-8">No news found.</li>';
+                return;
+            }
+            listContainer.innerHTML = '';
+            newsItems.forEach(item => {
+                const listItem = document.createElement('li');
+                listItem.className = 'bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700';
+                listItem.innerHTML = `
+                    <p class="font-semibold text-gray-500 dark:text-gray-400 text-sm">${item.date || ''}</p>
+                    <p class="mt-1 text-gray-700 dark:text-gray-300">${item.update || 'No update text.'}</p>
+                `;
+                listContainer.appendChild(listItem);
+            });
+        }
+
+        function renderPublications(publications) {
+            const listContainer = document.getElementById('publications-list');
+            const modalsContainer = document.getElementById('dynamic-modals-container');
+            if (!listContainer || !modalsContainer) return;
+
+            if (publications.length === 0) {
+                 listContainer.innerHTML = '<li class="text-center py-8">No publications found.</li>';
+                 return;
+            }
+            listContainer.innerHTML = '';
+            modalsContainer.innerHTML = '';
+            publications.forEach((pub, index) => {
+                const modalId = `publication-modal-${index}`;
+                const listItem = document.createElement('li');
+                listItem.className = 'bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700';
+                listItem.innerHTML = `
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
+                        <button class="open-modal hover:underline" data-modal="${modalId}">${pub.title || 'Untitled'}</button>
+                    </h3>
+                    <p class="text-gray-600 dark:text-gray-400">${pub.authors || ''}</p>
+                    <p class="text-gray-500 dark:text-gray-500 italic">${pub.venue || ''}</p>
+                    <a href="${pub.link || '#'}" target="_blank" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
+                `;
+                listContainer.appendChild(listItem);
+
+                const modalDiv = document.createElement('div');
+                modalDiv.id = modalId;
+                modalDiv.className = 'modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center';
+                const abstractHTML = pub.abstract ? pub.abstract.replace(/\\n/g, '</p><p class="mb-4">') : 'No abstract available.';
+                modalDiv.innerHTML = `
+                    <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
+                    <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50">
+                        <div class="py-4 text-left px-6">
+                            <div class="flex justify-between items-center pb-3">
+                                <p class="text-2xl font-bold text-gray-900 dark:text-white">Abstract</p>
+                                <div class="modal-close cursor-pointer z-50">
+                                    <svg class="fill-current text-gray-900 dark:text-white" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18"><path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path></svg>
+                                </div>
+                            </div>
+                            <div class="max-h-[70vh] overflow-y-auto scrollbar-custom pr-2">
+                                <p class="mb-4">${abstractHTML}</p>
+                            </div>
+                            <div class="flex justify-end pt-2">
+                                <button class="modal-close px-4 bg-transparent p-3 rounded-lg text-gray-600 dark:text-gray-400 hover:bg-gray-200 dark:hover:bg-gray-700 mr-2">Close</button>
+                                <a href="${pub.link || '#'}" target="_blank" class="px-4 bg-gray-600 dark:bg-gray-700 p-3 rounded-lg text-white hover:bg-gray-500 dark:hover:bg-gray-600">Paper Link</a>
+                            </div>
+                        </div>
+                    </div>
+                `;
+                modalsContainer.appendChild(modalDiv);
+            });
+        }
+        
+        function renderProjects(projects) {
+            const gridContainer = document.getElementById('projects-grid');
+            if (!gridContainer) return;
+
+            if (projects.length === 0) {
+                 gridContainer.innerHTML = '<p class="text-center col-span-full py-8">No projects found.</p>';
+                 return;
+            }
+            gridContainer.innerHTML = '';
+            projects.forEach(proj => {
+                const projectCard = document.createElement('div');
+                projectCard.className = 'bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col';
+                const descriptionHTML = proj.description ? proj.description.replace(/\\n/g, '<br>') : '';
+                projectCard.innerHTML = `
+                    <img src="${proj.image_url || 'https://placehold.co/600x400/111827/6B7280?text=Project'}" alt="${proj.title || 'Project Image'}" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/6B7280?text=Project';">
+                    <div class="p-6 flex flex-col flex-grow">
+                        <h3 class="text-2xl font-bold text-gray-900 dark:text-white mb-2">${proj.title || 'Untitled Project'}</h3>
+                        <p class="mb-4 flex-grow">${descriptionHTML}</p>
+                        <a href="${proj.link || '#'}" target="_blank" class="font-bold hover:underline mt-auto">Learn More &rarr;</a>
+                    </div>
+                `;
+                gridContainer.appendChild(projectCard);
+            });
+        }
+
+        // --- GENERAL PAGE LOGIC ---
+
+        // Typewriter effect
+        const typewriter = () => {
+            const roles = ["Researcher", "Engineer"];
+            let roleIndex = 0;
+            let charIndex = 0;
+            let isDeleting = false;
+            const textElement = document.getElementById('role-text');
+            const typingSpeed = 150;
+            const deletingSpeed = 100;
+            const delayBetweenRoles = 2000;
+
+            function type() {
+                const currentRole = roles[roleIndex];
+                let typeTimeout = typingSpeed;
+
+                if (isDeleting) {
+                    // Deleting
+                    textElement.textContent = currentRole.substring(0, charIndex - 1);
+                    charIndex--;
+                    typeTimeout = deletingSpeed;
+                } else {
+                    // Typing
+                    textElement.textContent = currentRole.substring(0, charIndex + 1);
+                    charIndex++;
+                }
+
+                // If word is fully typed
+                if (!isDeleting && charIndex === currentRole.length) {
+                    isDeleting = true;
+                    typeTimeout = delayBetweenRoles;
+                } 
+                // If word is fully deleted
+                else if (isDeleting && charIndex === 0) {
+                    isDeleting = false;
+                    roleIndex = (roleIndex + 1) % roles.length;
+                }
+                
+                setTimeout(type, typeTimeout);
+            }
+            type();
+        }
+
+
         const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
         const themeToggleLightIcon = document.getElementById('theme-toggle-light-icon');
         const themeToggleButton = document.getElementById('theme-toggle');
-
-        // Show the correct icon on page load
         if (localStorage.getItem('color-theme') === 'dark' || (!('color-theme' in localStorage) && window.matchMedia('(prefers-color-scheme: dark)').matches)) {
             themeToggleLightIcon.classList.remove('hidden');
         } else {
             themeToggleDarkIcon.classList.remove('hidden');
         }
-
         themeToggleButton.addEventListener('click', function() {
-            // toggle icons
             themeToggleDarkIcon.classList.toggle('hidden');
             themeToggleLightIcon.classList.toggle('hidden');
-
-            // if set via local storage previously
             if (localStorage.getItem('color-theme')) {
                 if (localStorage.getItem('color-theme') === 'light') {
                     document.documentElement.classList.add('dark');
@@ -368,7 +499,6 @@
                     document.documentElement.classList.remove('dark');
                     localStorage.setItem('color-theme', 'light');
                 }
-            // if NOT set via local storage previously
             } else {
                 if (document.documentElement.classList.contains('dark')) {
                     document.documentElement.classList.remove('dark');
@@ -380,14 +510,11 @@
             }
         });
 
-        // Mobile Menu Toggle
         const mobileMenuButton = document.getElementById('mobile-menu-button');
         const mobileMenu = document.getElementById('mobile-menu');
         mobileMenuButton.addEventListener('click', () => {
             mobileMenu.classList.toggle('hidden');
         });
-
-        // Close mobile menu when a link is clicked
         const mobileMenuLinks = mobileMenu.getElementsByTagName('a');
         for (let link of mobileMenuLinks) {
             link.addEventListener('click', () => {
@@ -397,11 +524,9 @@
             });
         }
 
-        // Copy Email to Clipboard
         const copyEmailButton = document.getElementById('copy-email-button');
         const emailInput = document.getElementById('email-input');
         const copyFeedback = document.getElementById('copy-feedback');
-
         copyEmailButton.addEventListener('click', () => {
             const tempTextArea = document.createElement('textarea');
             tempTextArea.value = emailInput.value;
@@ -425,49 +550,15 @@
             document.body.removeChild(tempTextArea);
         });
         
-        // Modal logic
-        const openmodal = document.querySelectorAll('.open-modal')
-        for (var i = 0; i < openmodal.length; i++) {
-          openmodal[i].addEventListener('click', function(event){
-            event.preventDefault()
-            toggleModal(event.target.attributes['data-modal'].value)
-          })
-        }
-        
-        const overlay = document.querySelectorAll('.modal-overlay')
-        for (var i = 0; i < overlay.length; i++) {
-          overlay[i].addEventListener('click', function(event){
-            toggleModal()
-          })
-        }
-        
-        var closemodal = document.querySelectorAll('.modal-close')
-        for (var i = 0; i < closemodal.length; i++) {
-          closemodal[i].addEventListener('click', function(event){
-            toggleModal()
-          })
-        }
-        
-        document.onkeydown = function(evt) {
-          evt = evt || window.event
-          var isEscape = false
-          if ("key" in evt) {
-            isEscape = (evt.key === "Escape" || evt.key === "Esc")
-          } else {
-            isEscape = (evt.keyCode === 27)
-          }
-          if (isEscape && document.body.classList.contains('modal-active')) {
-            toggleModal()
-          }
-        };
-        
         function toggleModal (modalID) {
             const body = document.querySelector('body')
             if(modalID){
                 const modal = document.getElementById(modalID)
-                modal.classList.toggle('opacity-0')
-                modal.classList.toggle('pointer-events-none')
-                body.classList.toggle('modal-active')
+                if(modal) {
+                    modal.classList.toggle('opacity-0')
+                    modal.classList.toggle('pointer-events-none')
+                    body.classList.toggle('modal-active')
+                }
             } else {
                 const modals = document.querySelectorAll('.modal');
                 for(var i = 0; i<modals.length; i++){
@@ -481,49 +572,41 @@
                 }
             }
         }
-        
-        // Typing effect logic
-        const roles = ["Researcher", "Engineer"];
-        let roleIndex = 0;
-        let charIndex = 0;
-        let isDeleting = false;
-        const textElement = document.getElementById('role-text');
-        
-        function type() {
-            const currentRole = roles[roleIndex];
+
+        function initializeModalEventListeners() {
+            const openmodal = document.querySelectorAll('.open-modal');
+            openmodal.forEach(button => {
+                button.replaceWith(button.cloneNode(true));
+            });
+            document.querySelectorAll('.open-modal').forEach(button => {
+                 button.addEventListener('click', function(event){
+                    event.preventDefault();
+                    const modalId = event.currentTarget.getAttribute('data-modal');
+                    toggleModal(modalId);
+                });
+            });
             
-            if (isDeleting) {
-                // Deleting
-                textElement.textContent = currentRole.substring(0, charIndex - 1);
-                charIndex--;
-            } else {
-                // Typing
-                textElement.textContent = currentRole.substring(0, charIndex + 1);
-                charIndex++;
-            }
-
-            // If word is fully typed
-            if (!isDeleting && charIndex === currentRole.length) {
-                isDeleting = true;
-                setTimeout(type, 3000); // Pause at end of word
-            } 
-            // If word is fully deleted
-            else if (isDeleting && charIndex === 0) {
-                isDeleting = false;
-                roleIndex = (roleIndex + 1) % roles.length;
-                setTimeout(type, 500); // Pause before typing new word
-            } 
-            else {
-                const typingSpeed = isDeleting ? 100 : 200;
-                setTimeout(type, typingSpeed);
-            }
+            const overlays = document.querySelectorAll('.modal-overlay');
+            overlays.forEach(overlay => {
+                overlay.addEventListener('click', () => toggleModal());
+            });
+            
+            const closemodals = document.querySelectorAll('.modal-close');
+            closemodals.forEach(button => {
+                button.addEventListener('click', () => toggleModal());
+            });
         }
+        
+        document.onkeydown = function(evt) {
+          evt = evt || window.event
+          var isEscape = (evt.key === "Escape" || evt.key === "Esc")
+          if (isEscape && document.body.classList.contains('modal-active')) {
+            toggleModal()
+          }
+        };
 
-        document.addEventListener('DOMContentLoaded', function() {
-            if(textElement) {
-                setTimeout(type, 500); // Start typing after a short delay
-            }
-        });
+        initializeModalEventListeners();
+
     </script>
 </body>
 </html>
