@@ -539,12 +539,12 @@
 
             // Start animations
             typewriter();
-            
-            // Fetch dynamic data and then initialize modals
-            Promise.all([fetchPublications(), fetchProjects(), fetchNews()])
-                .then(() => {
-                    initializeModalEventListeners();
-                });
+
+            // Initialize modal listeners immediately. This works for static and dynamic content.
+            initializeModalEventListeners();
+
+            // Fetch dynamic data in the background.
+            Promise.all([fetchPublications(), fetchProjects(), fetchNews()]);
         });
     </script>
 </body>
