@@ -244,7 +244,7 @@
     
     <!-- Modals -->
     <!-- Static Modals -->
-    <div id="journey-modal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div id="journey-modal" class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-[60]">
         <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
         <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-2xl mx-auto rounded shadow-lg z-50">
             <div class="py-4 text-left px-6">
@@ -452,7 +452,7 @@
 
                 const modalDiv = document.createElement('div');
                 modalDiv.id = modalId;
-                modalDiv.className = 'modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center';
+                modalDiv.className = 'modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-[60]';
                 const abstractHTML = pub.abstract ? linkify(pub.abstract).replace(/\\n/g, '</p><p class="mb-4">') : 'No abstract available.';
                 modalDiv.innerHTML = `
                     <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
@@ -496,7 +496,7 @@
                     <h3 class="text-xl font-bold text-gray-900 dark:text-white">
                         <button class="open-modal hover:underline" data-modal="${modalId}">${pat.title || 'Untitled'}</button>
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-400">${pat.authors || ''}</p>
+                    <p class="text-gray-600 dark:text-gray-400">${pat.inventors || pat.authors || ''}</p>
                     <p class="text-gray-500 dark:text-gray-500 italic">${pat.status || ''}</p>
                     <a href="${pat.link || '#'}" target="_blank" class="font-bold hover:underline text-sm mt-2 inline-block">Details Link &rarr;</a>
                 `;
@@ -504,7 +504,7 @@
 
                 const modalDiv = document.createElement('div');
                 modalDiv.id = modalId;
-                modalDiv.className = 'modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center';
+                modalDiv.className = 'modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center z-[60]';
                 const abstractHTML = pat.abstract ? linkify(pat.abstract).replace(/\\n/g, '</p><p class="mb-4">') : 'No abstract available.';
                 modalDiv.innerHTML = `
                     <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
@@ -591,7 +591,7 @@
                 const query = e.target.value.toLowerCase();
                 
                 const activeContent = pubsContent.classList.contains('hidden') ? patentsContent : pubsContent;
-                const listItems = activeContent.querySelectorAll('li');
+                const listItems = activeContent.querySelectorAll('ul > li');
 
                 listItems.forEach(item => {
                     if (item.id.includes('-loading') || item.id.includes('-empty')) {
@@ -609,6 +609,7 @@
         
         const profileImageSources = [
             'assets/img/rwik_1.JPG',
+            'assets/img/rwik.png',
         ];
         const IMAGE_CHANGE_INTERVAL = 10000;
         let currentImageIndex = 0;
