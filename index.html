@@ -306,46 +306,65 @@
             }
         }
 
+        /**
+         * A robust CSV parser that handles quoted fields.
+         * @param {string} text The raw CSV text.
+         * @returns {Array<Object>} An array of objects.
+         */
         function parseCSV(text) {
-            const regex = /,(?=(?:(?:[^"]*"){2})*[^"]*$)/;
             const lines = text.split(/\r?\n/);
             if (lines.length < 2) return [];
-            const headers = lines.shift().split(regex).map(h => h.trim().replace(/"/g, ''));
+
+            const headers = lines.shift().split(',').map(h => h.trim().replace(/"/g, ''));
             const result = [];
+
             lines.forEach(line => {
                 if (!line.trim()) return;
+                
                 const obj = {};
-                const values = line.split(regex);
+                let values = [];
+                let currentField = '';
+                let inQuotes = false;
+
+                for (let i = 0; i < line.length; i++) {
+                    const char = line[i];
+                    if (char === '"') {
+                        if (inQuotes && line[i + 1] === '"') { // Handle escaped quote ""
+                            currentField += '"';
+                            i++; // Skip the next quote
+                        } else {
+                            inQuotes = !inQuotes;
+                        }
+                    } else if (char === ',' && !inQuotes) {
+                        values.push(currentField);
+                        currentField = '';
+                    } else {
+                        currentField += char;
+                    }
+                }
+                values.push(currentField);
+
                 headers.forEach((header, i) => {
-                    obj[header] = values[i] ? values[i].replace(/^"|"$/g, '').trim() : '';
+                    obj[header] = values[i] ? values[i].trim() : '';
                 });
-                result.push(obj);
+
+                if (Object.values(obj).some(v => v)) {
+                   result.push(obj);
+                }
             });
             return result;
         }
         
+        /**
+         * Converts text with LaTeX-style \href{URL}{TEXT} syntax into clickable HTML links.
+         * @param {string} text The text to process.
+         * @returns {string} The text with HTML links.
+         */
         function linkify(text) {
             if (!text) return '';
             
-            // First, process Markdown-style links: [text](url)
-            const markdownRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
-            let processedText = text.replace(markdownRegex, '<a href="$2" target="_blank" class="text-orange-500 font-semibold hover:underline">$1</a>');
-
-            // Then, process standalone URLs (http, https, www)
-            // This regex avoids matching URLs inside already created <a> tags
-            const urlRegex = /(?<!href=")((https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
-            
-            processedText = processedText.replace(urlRegex, function(url) {
-                let hyperlink = url;
-                // Prepend https:// if protocol is missing (for www links)
-                if (!hyperlink.match('^https?:\/\/')) {
-                    hyperlink = 'https://' + hyperlink;
-                }
-                // Return a styled anchor tag
-                return `<a href="${hyperlink}" target="_blank" class="text-orange-500 font-semibold hover:underline">${url}</a>`;
-            });
-
-            return processedText;
+            const latexRegex = /\\href\{([^}]+)\}\{([^}]+)\}/g;
+            return text.replace(latexRegex, '<a href="$1" target="_blank" class="text-orange-500 font-semibold hover:underline">$2</a>');
         }
 
 
@@ -686,4 +705,3 @@
     </script>
 </body>
 </html>
-
