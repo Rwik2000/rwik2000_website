@@ -127,7 +127,19 @@
                     </p>
                 </div>
                 <div class="text-center">
-                    <img src="assets/img/rwik_1.JPG" alt="myself" class="rounded-full shadow-lg mx-auto border-4 border-gray-200 dark:border-gray-700 w-64 h-64 md:w-96 md:h-96 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/384x384/1f2937/ffffff?text=RR';">
+                    <!-- Profile Image Slider Container -->
+                    <div id="profile-image-container" class="relative rounded-full shadow-lg mx-auto border-4 border-gray-200 dark:border-gray-700 w-64 h-64 md:w-96 md:h-96 overflow-hidden">
+                        <!-- Images will be injected here by JavaScript -->
+                        
+                        <!-- Slider Controls -->
+                        <button id="prev-image-btn" class="absolute top-1/2 left-0 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full ml-2 hover:bg-black/50 transition-colors focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7" /></svg>
+                        </button>
+                        <button id="next-image-btn" class="absolute top-1/2 right-0 transform -translate-y-1/2 bg-black/30 text-white p-2 rounded-full mr-2 hover:bg-black/50 transition-colors focus:outline-none">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" /></svg>
+                        </button>
+                    </div>
+
                     <button class="open-modal mt-8 inline-block text-gray-800 dark:text-white font-bold py-3 px-8 rounded-lg border-2 border-gray-800 dark:border-gray-600 hover:underline transition-transform duration-300 transform hover:scale-105" data-modal="journey-modal">
                         Know more about me
                     </button>
@@ -135,16 +147,6 @@
             </div>
         </section>
 
-        <!-- About Section
-        <section id="about" class="py-20">
-             <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">About Me</h2>
-             <div class="max-w-4xl mx-auto">
-                 <p class="text-lg mb-4 text-center">
-                    My research focuses on the intersection of model-based control and model-free reinforcement learning. I develop algorithms to improve the performance and reliability of autonomous systems like drones and off-road vehicles, with a focus on trajectory tracking, control optimization, and perception.
-                </p>
-             </div>
-        </section> -->
-        
         <!-- Updates Section (Publications & News) -->
         <section id="updates" class="py-20">
             <div class="grid grid-cols-1 lg:grid-cols-2 gap-16">
@@ -243,22 +245,6 @@
 
     <script>
         // --- GOOGLE SHEETS INTEGRATION ---
-        
-        // INSTRUCTIONS:
-        // 1. Create a Google Sheet with three tabs: "Publications", "Projects", and "News".
-        // 2. In EACH tab, the first row MUST be the header row.
-        //    - Publications: title, authors, venue, link, abstract
-        //    - Projects: title, description, image_url, link
-        //    - News: date, update
-        // 3. To add a line break (new paragraph), type `\n` directly into the cell. Do NOT use Ctrl+Enter.
-        // 4. Go to File > Share > Publish to web.
-        // 5. In the dialog, for EACH tab:
-        //    - Select the specific tab (e.g., "Publications").
-        //    - Select "Comma-separated values (.csv)".
-        //    - Click "Publish" and copy the generated URL.
-        // 6. Find the `gid=` number in each URL. This is the unique ID for that tab.
-        // 7. Paste the full URLs for your tabs below.
-        
         const PUBLICATIONS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=0&single=true&output=csv';
         const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=2102024018&single=true&output=csv';
         const NEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=262204434&single=true&output=csv';
@@ -268,6 +254,7 @@
             fetchProjects();
             fetchNews();
             typewriter(); // Start the typewriter effect
+            initializeImageSlider(); // Initialize the profile image slider
         });
 
         async function fetchNews() {
@@ -336,6 +323,31 @@
             });
             return result;
         }
+        
+        function linkify(text) {
+            if (!text) return '';
+            
+            // First, process Markdown-style links: [text](url)
+            const markdownRegex = /\[([^\]]+)\]\(([^)]+)\)/g;
+            let processedText = text.replace(markdownRegex, '<a href="$2" target="_blank" class="text-orange-500 font-semibold hover:underline">$1</a>');
+
+            // Then, process standalone URLs (http, https, www)
+            // This regex avoids matching URLs inside already created <a> tags
+            const urlRegex = /(?<!href=")((https?|ftp|file):\/\/[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])|(\bwww\.[-A-Z0-9+&@#\/%?=~_|!:,.;]*[-A-Z0-9+&@#\/%=~_|])/ig;
+            
+            processedText = processedText.replace(urlRegex, function(url) {
+                let hyperlink = url;
+                // Prepend https:// if protocol is missing (for www links)
+                if (!hyperlink.match('^https?:\/\/')) {
+                    hyperlink = 'https://' + hyperlink;
+                }
+                // Return a styled anchor tag
+                return `<a href="${hyperlink}" target="_blank" class="text-orange-500 font-semibold hover:underline">${url}</a>`;
+            });
+
+            return processedText;
+        }
+
 
         function renderNews(newsItems) {
             const listContainer = document.getElementById('news-list');
@@ -349,9 +361,10 @@
             newsItems.forEach(item => {
                 const listItem = document.createElement('li');
                 listItem.className = 'bg-gray-50 dark:bg-gray-800 p-4 rounded-lg border border-gray-200 dark:border-gray-700';
+                const updateHTML = item.update ? linkify(item.update).replace(/\\n/g, '<br>') : 'No update text.';
                 listItem.innerHTML = `
                     <p class="font-semibold text-gray-500 dark:text-gray-400 text-sm">${item.date || ''}</p>
-                    <p class="mt-1 text-gray-700 dark:text-gray-300">${item.update || 'No update text.'}</p>
+                    <p class="mt-1 text-gray-700 dark:text-gray-300">${updateHTML}</p>
                 `;
                 listContainer.appendChild(listItem);
             });
@@ -385,7 +398,7 @@
                 const modalDiv = document.createElement('div');
                 modalDiv.id = modalId;
                 modalDiv.className = 'modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center';
-                const abstractHTML = pub.abstract ? pub.abstract.replace(/\\n/g, '</p><p class="mb-4">') : 'No abstract available.';
+                const abstractHTML = pub.abstract ? linkify(pub.abstract).replace(/\\n/g, '</p><p class="mb-4">') : 'No abstract available.';
                 modalDiv.innerHTML = `
                     <div class="modal-overlay absolute w-full h-full bg-black opacity-50"></div>
                     <div class="modal-container bg-white dark:bg-gray-800 w-11/12 md:max-w-5xl mx-auto rounded shadow-lg z-50">
@@ -422,7 +435,7 @@
             projects.forEach(proj => {
                 const projectCard = document.createElement('div');
                 projectCard.className = 'bg-white dark:bg-gray-800 rounded-lg overflow-hidden shadow-lg border border-gray-200 dark:border-gray-700 transform hover:-translate-y-2 transition-transform duration-300 flex flex-col';
-                const descriptionHTML = proj.description ? proj.description.replace(/\\n/g, '<br>') : '';
+                const descriptionHTML = proj.description ? linkify(proj.description).replace(/\\n/g, '<br>') : '';
                 projectCard.innerHTML = `
                     <img src="${proj.image_url || 'https://placehold.co/600x400/111827/6B7280?text=Project'}" alt="${proj.title || 'Project Image'}" class="w-full h-48 object-cover" onerror="this.onerror=null;this.src='https://placehold.co/600x400/111827/6B7280?text=Project';">
                     <div class="p-6 flex flex-col flex-grow">
@@ -436,6 +449,73 @@
         }
 
         // --- GENERAL PAGE LOGIC ---
+
+        // --- PROFILE IMAGE SLIDER ---
+        const profileImageSources = [
+            'assets/img/rwik_1.JPG',
+            // Add more image paths here, for example:
+            // 'assets/img/rwik_2.jpg', 
+            // 'assets/img/rwik_3.png'
+        ];
+        const IMAGE_CHANGE_INTERVAL = 10000; // Time in milliseconds (10 seconds)
+        let currentImageIndex = 0;
+        let imageSliderInterval;
+
+        function initializeImageSlider() {
+            const container = document.getElementById('profile-image-container');
+            if (!container || profileImageSources.length === 0) return;
+            
+            profileImageSources.forEach((src, index) => {
+                const img = document.createElement('img');
+                img.src = src;
+                img.alt = `Rwik Rana - Profile Image ${index + 1}`;
+                img.className = `profile-image absolute top-0 left-0 w-full h-full object-cover transition-opacity duration-500 ease-in-out`;
+                img.onerror = function() { this.onerror=null; this.src='https://placehold.co/384x384/1f2937/ffffff?text=RR'; };
+                if (index !== 0) {
+                    img.classList.add('opacity-0');
+                }
+                container.insertBefore(img, container.firstChild);
+            });
+
+            const prevBtn = document.getElementById('prev-image-btn');
+            const nextBtn = document.getElementById('next-image-btn');
+
+            if (profileImageSources.length <= 1) {
+                prevBtn.style.display = 'none';
+                nextBtn.style.display = 'none';
+                return;
+            }
+
+            const showImage = (index) => {
+                const images = document.querySelectorAll('.profile-image');
+                images.forEach((img, i) => {
+                    img.classList.toggle('opacity-0', i !== index);
+                });
+                currentImageIndex = index;
+            };
+
+            const startSlider = () => {
+                clearInterval(imageSliderInterval);
+                imageSliderInterval = setInterval(() => {
+                    const nextIndex = (currentImageIndex + 1) % profileImageSources.length;
+                    showImage(nextIndex);
+                }, IMAGE_CHANGE_INTERVAL);
+            };
+
+            prevBtn.addEventListener('click', () => {
+                const prevIndex = (currentImageIndex - 1 + profileImageSources.length) % profileImageSources.length;
+                showImage(prevIndex);
+                startSlider();
+            });
+
+            nextBtn.addEventListener('click', () => {
+                const nextIndex = (currentImageIndex + 1) % profileImageSources.length;
+                showImage(nextIndex);
+                startSlider();
+            });
+
+            startSlider();
+        }
 
         // Typewriter effect
         const typewriter = () => {
@@ -453,22 +533,18 @@
                 let typeTimeout = typingSpeed;
 
                 if (isDeleting) {
-                    // Deleting
                     textElement.textContent = currentRole.substring(0, charIndex - 1);
                     charIndex--;
                     typeTimeout = deletingSpeed;
                 } else {
-                    // Typing
                     textElement.textContent = currentRole.substring(0, charIndex + 1);
                     charIndex++;
                 }
 
-                // If word is fully typed
                 if (!isDeleting && charIndex === currentRole.length) {
                     isDeleting = true;
                     typeTimeout = delayBetweenRoles;
                 } 
-                // If word is fully deleted
                 else if (isDeleting && charIndex === 0) {
                     isDeleting = false;
                     roleIndex = (roleIndex + 1) % roles.length;
@@ -610,3 +686,4 @@
     </script>
 </body>
 </html>
+
