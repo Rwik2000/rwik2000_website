@@ -118,7 +118,7 @@
         <section id="home" class="flex items-center">
             <div class="grid md:grid-cols-2 gap-12 items-center w-full">
                 <div class="text-center md:text-left">
-                    <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
+                    <h1 id="greeting-text" class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
                         Hello,
                     </h1>
                     <h1 class="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white leading-tight">
@@ -327,12 +327,20 @@
         
         const PUBLICATIONS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=0&single=true&output=csv';
         const PATENTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=1250559449&single=true&output=csv';
-        const RESEARCH_INTEREST_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=309578428&single=true&output=csv';
+        const RESEARCH_INTEREST_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=YOUR_RESEARCH_INTEREST_GID_HERE&single=true&output=csv';
         const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=2102024018&single=true&output=csv';
         const NEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=262204434&single=true&output=csv';
         
         async function fetchResearchInterest() {
             const introContainer = document.getElementById('intro-research-interest');
+            
+            if (RESEARCH_INTEREST_CSV_URL.includes('YOUR_RESEARCH_INTEREST_GID_HERE')) {
+                const defaultText = `My research focuses on unifying controls and perception. I design algorithms that combine model-based structure with model-free learning and use representation learning to capture task-relevant state for control. The goal is dependable autonomy in unstructured settings—particularly off-road and field robotics—where dynamics, terrain, and sensing can be highly variable. I am also interested in whole-body control for humanoids and high-DoF mobile platforms.`;
+                if(introContainer) introContainer.innerHTML = defaultText;
+                console.warn("RESEARCH_INTEREST_CSV_URL is using a placeholder GID. Please update it in the script to fetch live data.");
+                return;
+            }
+
             try {
                 const response = await fetch(RESEARCH_INTEREST_CSV_URL);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
@@ -828,6 +836,25 @@
             }
             type();
         }
+        
+        function cycleGreetings() {
+            const greetings = [
+                "Hello,",
+                "नमस्ते,",
+                "নমস্কার,",
+                "नमस्कार,",
+                "નમસ્તે,"
+            ];
+            let greetingIndex = 0;
+            const greetingElement = document.getElementById('greeting-text');
+
+            if (greetingElement) {
+                setInterval(() => {
+                    greetingIndex = (greetingIndex + 1) % greetings.length;
+                    greetingElement.textContent = greetings[greetingIndex];
+                }, 10000); // 30 seconds
+            }
+        }
 
         function initializeTheme() {
             const themeToggleDarkIcon = document.getElementById('theme-toggle-dark-icon');
@@ -970,6 +997,7 @@
             fetchProjects();
             fetchNews();
             typewriter();
+            cycleGreetings();
             initializeImageSlider();
             setupTabs();
             setupSearch(); // Initialize the new search functionality
