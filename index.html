@@ -327,19 +327,12 @@
         
         const PUBLICATIONS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=0&single=true&output=csv';
         const PATENTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=1250559449&single=true&output=csv';
-        const RESEARCH_INTEREST_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=YOUR_RESEARCH_INTEREST_GID_HERE&single=true&output=csv';
+        const RESEARCH_INTEREST_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=309578428&single=true&output=csv';
         const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=2102024018&single=true&output=csv';
         const NEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=262204434&single=true&output=csv';
         
         async function fetchResearchInterest() {
             const introContainer = document.getElementById('intro-research-interest');
-
-            if (RESEARCH_INTEREST_CSV_URL.includes('YOUR_RESEARCH_INTEREST_GID_HERE')) {
-                // As a fallback, use a default text.
-                const fallbackText = 'My research focuses on unifying controls and perception. I design algorithms that combine model-based structure with model-free learning and use representation learning to capture task-relevant state for control. The goal is dependable autonomy in unstructured settings—particularly off-road and field robotics—where dynamics, terrain, and sensing can be highly variable. I am also interested in whole-body control for humanoids and high-DoF mobile platforms.';
-                if(introContainer) introContainer.innerHTML = fallbackText;
-                return;
-            }
             try {
                 const response = await fetch(RESEARCH_INTEREST_CSV_URL);
                 if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
