@@ -130,8 +130,8 @@
                     <p class="mt-6 text-lg md:text-xl max-w-xl">
                         I am a Ph.D. student at the University of Texas at Austin, working with Prof. Joydeep Biswas in the Autonomous Mobile Robotics Laboratory (AMRL).
                     </p>
-                    <p class="mt-6 text-lg md:text-xl max-w-xl">
-                    My research focuses on the intersection of model-based control and model-free reinforcement learning. I develop algorithms to improve the performance and reliability of autonomous systems like drones and off-road vehicles, with a focus on trajectory tracking, control optimization, and perception.
+                    <p id="intro-research-interest" class="mt-6 text-lg md:text-xl max-w-xl">
+                        Loading research interest...
                     </p>
                 </div>
                 <div class="text-center">
@@ -326,9 +326,32 @@
         // --- GOOGLE SHEETS INTEGRATION ---
         
         const PUBLICATIONS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=0&single=true&output=csv';
+        const PATENTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=1250559449&single=true&output=csv';
+        const RESEARCH_INTEREST_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=YOUR_RESEARCH_INTEREST_GID_HERE&single=true&output=csv';
         const PROJECTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=2102024018&single=true&output=csv';
         const NEWS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=262204434&single=true&output=csv';
-        const PATENTS_CSV_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=1250559449&single=true&output=csv';
+        
+        async function fetchResearchInterest() {
+            const introContainer = document.getElementById('intro-research-interest');
+
+            if (RESEARCH_INTEREST_CSV_URL.includes('YOUR_RESEARCH_INTEREST_GID_HERE')) {
+                // As a fallback, use a default text.
+                const fallbackText = 'My research focuses on unifying controls and perception. I design algorithms that combine model-based structure with model-free learning and use representation learning to capture task-relevant state for control. The goal is dependable autonomy in unstructured settings—particularly off-road and field robotics—where dynamics, terrain, and sensing can be highly variable. I am also interested in whole-body control for humanoids and high-DoF mobile platforms.';
+                if(introContainer) introContainer.innerHTML = fallbackText;
+                return;
+            }
+            try {
+                const response = await fetch(RESEARCH_INTEREST_CSV_URL);
+                if (!response.ok) throw new Error(`HTTP error! status: ${response.status}`);
+                const csvText = await response.text();
+                const items = parseCSV(csvText);
+                renderResearchInterest(items);
+            } catch (error) {
+                console.error("Error fetching research interest:", error);
+                const errorMessage = 'Failed to load research interest.';
+                if (introContainer) introContainer.textContent = errorMessage;
+            }
+        }
 
         async function fetchNews() {
             const loadingElement = document.getElementById('news-loading');
@@ -338,7 +361,8 @@
                 const csvText = await response.text();
                 const newsItems = parseCSV(csvText);
                 renderNews(newsItems);
-            } catch (error) {
+            } catch (error)
+            {
                 console.error("Error fetching news:", error);
                 if (loadingElement) {
                     loadingElement.textContent = 'Failed to load news.';
@@ -482,6 +506,22 @@
             const isVideoByExt = videoExtensions.some(ext => url.toLowerCase().endsWith(ext));
             const isImgurVideo = url.includes('i.imgur.com') && url.endsWith('.mp4');
             return isVideoByExt || isImgurVideo;
+        }
+        
+        function renderResearchInterest(items) {
+            const introContainer = document.getElementById('intro-research-interest');
+
+            if (!introContainer) return;
+
+            if (items.length === 0 || !items[0]['Research Interest']) {
+                const errorMessage = 'No research interest statement found.';
+                introContainer.innerHTML = errorMessage;
+                return;
+            }
+            const interestText = items[0]['Research Interest'];
+            const formattedText = interestText.replace(/\\n/g, '<br>');
+
+            introContainer.innerHTML = formattedText;
         }
 
         function renderNews(newsItems) {
@@ -848,28 +888,30 @@
             const copyEmailButton = document.getElementById('copy-email-button');
             const emailInput = document.getElementById('email-input');
             const copyFeedback = document.getElementById('copy-feedback');
-            copyEmailButton.addEventListener('click', () => {
-                const tempTextArea = document.createElement('textarea');
-                tempTextArea.value = emailInput.value;
-                document.body.appendChild(tempTextArea);
-                tempTextArea.select();
-                try {
-                    document.execCommand('copy');
-                    copyFeedback.textContent = 'Email copied to clipboard!';
-                    copyFeedback.classList.remove('text-red-500');
-                    copyFeedback.classList.add('text-green-500');
-                    copyFeedback.style.opacity = '1';
-                    setTimeout(() => {
-                        copyFeedback.style.opacity = '0';
-                    }, 2000);
-                } catch (err) {
-                    console.error('Failed to copy text: ', err);
-                    copyFeedback.textContent = 'Failed to copy!';
-                    copyFeedback.classList.remove('text-green-500');
-                    copyFeedback.classList.add('text-red-500');
-                }
-                document.body.removeChild(tempTextArea);
-            });
+            if (copyEmailButton) {
+                copyEmailButton.addEventListener('click', () => {
+                    const tempTextArea = document.createElement('textarea');
+                    tempTextArea.value = emailInput.value;
+                    document.body.appendChild(tempTextArea);
+                    tempTextArea.select();
+                    try {
+                        document.execCommand('copy');
+                        copyFeedback.textContent = 'Email copied to clipboard!';
+                        copyFeedback.classList.remove('text-red-500');
+                        copyFeedback.classList.add('text-green-500');
+                        copyFeedback.style.opacity = '1';
+                        setTimeout(() => {
+                            copyFeedback.style.opacity = '0';
+                        }, 2000);
+                    } catch (err) {
+                        console.error('Failed to copy text: ', err);
+                        copyFeedback.textContent = 'Failed to copy!';
+                        copyFeedback.classList.remove('text-green-500');
+                        copyFeedback.classList.add('text-red-500');
+                    }
+                    document.body.removeChild(tempTextArea);
+                });
+            }
         }
         
         function toggleModal (modalID) {
@@ -929,6 +971,7 @@
 
         // Initialize all event listeners
         document.addEventListener('DOMContentLoaded', () => {
+            fetchResearchInterest();
             fetchPublications();
             fetchPatents();
             fetchProjects();
