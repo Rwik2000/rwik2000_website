@@ -11,14 +11,15 @@ ACHIEVEMENTS_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8
 EDUCATION_CSV    = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=308131037&single=true&output=csv"
 RESEARCH_CSV     = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=309578428&single=true&output=csv"
 EXPERIENCE_CSV   = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=322365384&single=true&output=csv"  # e.g., ".../pub?gid=123456789&single=true&output=csv"
+SKILLS_CSV = "https://docs.google.com/spreadsheets/d/e/2PACX-1vTbczS5lAOV8I8NLH4srTn72hmEEEjsS10aIqMRIu7ogTKiMYhqrEYBnUfWXw77M8bnQBNKMUoucVJl/pub?gid=2062416334&single=true&output=csv"
 
 # === Output paths (match your \input{}s) ===
 PUBS_TEX = Path("sections/publications.tex")
 ACHV_TEX = Path("sections/achievments.tex")
 EDU_TEX  = Path("sections/education.tex")
 RES_TEX  = Path("sections/research.tex")
-# NEW:
 EXP_TEX  = Path("sections/experience.tex")
+SKL_TEX  = Path("sections/skills.tex")
 
 # === Formatting knobs ===
 MY_NAME = "Rwik Rana"
@@ -103,16 +104,34 @@ def norm_experience_row(row:dict):
                 return str(row[n]).strip()
         return ""
     return {
-        "company":     g("Company"),
-        "team":        g("Team"),
-        "experience":  g("Experience", "Role", "Project"),
-        "advisors":    g("Advisors", "Advisor"),
-        "description": g("Description", "Bullets"),
-        "position":    g("Position", "Title"),
-        # company-date can be named either "Company Date" or just "Date"
+        "company":      g("Company"),
+        "team":         g("Team"),
+        "experience":   g("Experience", "Role", "Project"),
+        "advisors":     g("Advisors", "Advisor"),
+        "description":  g("Description", "Bullets"),
+        "position":     g("Position", "Title"),
         "company_date": g("Company Date", "Date"),
-        "tag":         g("tag","Tag"),
+        "tag":          g("tag","Tag"),
+        # NEW link fields
+        "paper_link":   g("Paper Link", "Paper", "Paper URL"),
+        "code_link":    g("Code Link", "Code", "Code URL", "Github", "GitHub"),
+        "website_link": g("Project Website", "Website", "Project URL"),
+        "video_link":   g("Video Link", "Video", "Demo Video"),
     }
+
+def _format_exp_links(r: dict) -> str:
+    """Builds space-separated [paper] [code] [website] [video] hyperlinks if present."""
+    links = []
+    if r.get("paper_link"):
+        links.append(rf"\href{{{esc_edu(r['paper_link'])}}}{{[paper]}}")
+    if r.get("code_link"):
+        links.append(rf"\href{{{esc_edu(r['code_link'])}}}{{[code]}}")
+    if r.get("website_link"):
+        links.append(rf"\href{{{esc_edu(r['website_link'])}}}{{[website]}}")
+    if r.get("video_link"):
+        links.append(rf"\href{{{esc_edu(r['video_link'])}}}{{[video]}}")
+    return " ".join(links)
+
 
 # --- builders (existing) ---
 def make_pub_item(r):
@@ -120,21 +139,22 @@ def make_pub_item(r):
     authors = bold_name(esc_plain(r["authors"]))
     venue   = esc_plain(r["venue"])
     link    = r["link"]
-    linkpart = (f" \\quad \\href{{{link}}}{{link}}" if (INCLUDE_LINK and link) else "")
+    linkpart = (f" \\quad \\href{{{link}}}{{[link]}}" if (INCLUDE_LINK and link) else "")
     return (
 f"""    \\item \\textbf{{{title}}} \\\\
         {authors},
-        {{\\\\ \\textit{{{venue}}}}}{linkpart}"""
+        {{\\\\ \\textit{{{venue}}}}}{linkpart}\\"""
     )
 
 def build_publications_tex(pubs, pats):
     lines = [
         r"% AUTO-GENERATED — do not edit manually",
+        r"\vspace{5pt}",
         r"\noindent {\large \bf PUBLICATIONS \& PATENTS} \\ [-5pt]",
         r"\rule{\textwidth}{1.5pt}",
-        r"\vspace{-10pt}",
+        # r"\vspace{-10pt}",
         r"\begin{enumerate}",
-        r"    \itemsep-0.3em",
+        # r"    \itemsep-0.3em",
     ]
     for r in pubs: lines.append(make_pub_item(r))
     for r in pats: lines.append(make_pub_item(r))
@@ -145,9 +165,9 @@ def build_achievements_tex(items):
     lines = [
         r"% AUTO-GENERATED — do not edit manually",
         r"\noindent {\large \bf ACHIEVEMENTS} \\[-5pt]",
-        r"\rule{\textwidth}{1.5pt}",
-        r"\vspace{-18pt}",
-        r"",
+        r"\rule{\textwidth}{1.5pt}\\",
+        r"\vspace{-12pt}",
+        # r"",
         r"\begin{enumerate}",
         r"    \itemsep-0.3em",
     ]
@@ -165,8 +185,8 @@ def split_program_lines(program:str)->str:
 def build_education_tex(rows):
     lines = [
         r"% AUTO-GENERATED — do not edit manually",
-        r"\noindent {\bf EDUCATION} \\[-7.5pt]",
-        r"\rule{\textwidth}{1.5pt}",
+        r"\noindent {\large \bf EDUCATION} \\[-5pt]",
+        r"\rule{\textwidth}{1.5pt}\\",
         r"",
     ]
     for r in rows:
@@ -183,15 +203,15 @@ f"""{{\\bf {inst}}}{{  \\hfill \\textit{{{loc}}} \\\\[0pt]
 \\textbf{{Relevant coursework}}: {crs}""" if crs else "") + """}}
 """
         )
-    lines.append("")
+        lines.append(r"\vspace{5pt}")
     return "\n".join(lines)
 
 def build_research_tex(paragraphs):
     lines = [
         r"% AUTO-GENERATED — do not edit manually",
-        r"\noindent {\bf RESEARCH INTERESTS} \\[-7.5pt]",
-        r"\rule{\textwidth}{1.5pt}",
-        r"\vspace{-6pt}",
+        r"\noindent {\large \bf RESEARCH INTERESTS} \\[-5pt]",
+        r"\rule{\textwidth}{1.5pt}\\",
+        # r"\vspace{0.5pt}",
         "",
     ]
     for i, para in enumerate(paragraphs):
@@ -211,11 +231,11 @@ def _desc_to_itemize(desc_raw: str) -> str:
     if not has_item:
         items = r"\item " + items
 
-    # Absolutely no vertical padding above/below or between items
+    # Absolutely no vertical padding above/below or between items, with left indent
     return (
         "% tight list\n"
-        "\\vspace{-10pt}\n"
-        "\\begin{itemize}\n"
+        "\\vspace{-8pt}\n"
+        "\\begin{itemize}[leftmargin=3.0em,labelsep=0.6em]\n"
         "  \\setlength{\\itemsep}{0pt}\n"
         "  \\setlength{\\parskip}{0pt}\n"
         "  \\setlength{\\parsep}{0pt}\n"
@@ -223,21 +243,23 @@ def _desc_to_itemize(desc_raw: str) -> str:
         "  \\setlength{\\partopsep}{0pt}\n"
         f"  {items}\n"
         "\\end{itemize}\n"
-        # "\\vspace{-2pt}\n"
     )
-
 
 
 def build_experience_tex(rows):
     """
     Exact sheet order; zero spacing within a company block.
-    Only adds a small gap between different (company, position, date) blocks.
+    Heading:  {Company}, \textit{Position} \hfill \textit{CompanyDate}\\
+    Subline:  \textit{Experience} --- Team [paper] [code] [website] [video] \hfill Advisors\\
+    Bullets:  compact itemize produced by _desc_to_itemize()
     """
     out = [
         r"% AUTO-GENERATED — do not edit manually",
-        r"\noindent {\bf EXPERIENCE} \\[-7.5pt]",
+        r"\vspace{5pt}",
+        r"\noindent {\large \bf EXPERIENCE} \\[-5pt]",
         r"\rule{\textwidth}{1.5pt}",
-        r"{\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}",  # no paragraph gaps
+        r"\vspace{1pt}\\"
+        # r"{\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}",  # suppress paragraph gaps locally
     ]
 
     current_key = None
@@ -256,35 +278,89 @@ def build_experience_tex(rows):
         pos  = esc_edu(pos_raw)
         dt   = esc_edu(dt_raw)
 
-        # New company/position/date heading
+        # New (company, position, date) heading
         if key != current_key:
-            if not first_block:
-                out.append(r"\vspace{4pt}")  # ONLY spacing between different companies/positions/dates
+            # if not first_block:
+            #     out.append(r"\vspace{10pt}")  # spacing between companies, if desired
             left  = f"{{\\bf {comp}}}" + (f", \\textit{{{pos}}}" if pos else "")
             right = f" \\hfill \\textit{{{dt}}}" if dt else ""
-            out.append(left + right + r"\\")   # plain line break; no [-pt] tweaks
+            out.append(left + right + r"\\")
+            # out.append(r"\vspace{30pt}")  # tighten space after heading
             current_key = key
             first_block = False
 
-        # Experience subheading (flush to bullets)
+        # Subheading line: Experience --- Team + optional links, advisors on right
         exp  = esc_edu(r.get("experience", ""))
         team = esc_edu(r.get("team", ""))
         adv  = esc_edu(r.get("advisors", ""))
 
-        left_line = f"\\textit{{{exp}}}" if not team else f"\\textit{{{exp}}} --- {team}"
-        if left_line.strip():
-            line = left_line + (f" \\hfill {adv}" if adv else "")
-            out.append(line + r"\\")  # plain line break directly into itemize
+        # left_core = rf"\textit{{{exp}}}" if not team else rf"\textit{{{exp}}} --- {team}"
+        left_indent = r"\hspace*{0.8em}"  # tweak amount to taste
 
-        # Bullets (already zero top/bottom spacing)
+        left_core = (
+            rf"{left_indent}\textit{{{exp}}}"
+            if not team
+            else rf"{left_indent}\textit{{{exp}}} --- {team}"
+        )
+        links_str = _format_exp_links(r)  # builds \href{...}{[paper]} etc. when present
+        if links_str:
+            left_core = f"{left_core} {links_str}"
+
+        if left_core.strip():
+            out.append(left_core + (f" \\hfill {adv}" if adv else "") + r"\\")
+
+        # Bullets (already compact/indented via _desc_to_itemize)
         dblock = _desc_to_itemize(r.get("description", ""))
         if dblock:
             out.append(dblock)
+            out.append(r"\vspace{7pt}")  # uncomment if you want space after each entry
 
-    out.append("}")  # end local spacing group
-    out.append("")   # single trailing newline
+    # out.append("}")   # end local spacing group
+    out.append("")    # trailing newline
     return "\n".join(out)
 
+def build_skills_tex(rows):
+    """
+    Input: rows from the Skills tab where columns are categories (Libraries, Coding, ...)
+           and each column has items down the rows (cells can be blank).
+    Output: a compact SKILLS section with one line per category.
+    """
+    if not rows:
+        return "% No skills rows"
+
+    # preserve column order exactly as in the sheet
+    columns = list(rows[0].keys())
+
+    # collect non-empty cells per column (skip completely empty column names if any)
+    col_to_items = []
+    for col in columns:
+        if not (col or "").strip():
+            continue
+        items = []
+        for r in rows:
+            cell = (r.get(col) or "").strip()
+            if cell:
+                items.append(esc_edu(cell))
+        # keep the category even if empty, but usually there are items
+        col_to_items.append((esc_edu(col), items))
+
+    lines = [
+        r"% AUTO-GENERATED — do not edit manually",
+        # r"\vspace{5pt}",
+        r"\noindent {\large \bf SKILLS} \\[-5pt]",
+        r"\rule{\textwidth}{1.5pt}",
+        r"\vspace{-6pt}",
+        "",
+    ]
+    lines.append(r"\begin{itemize}[leftmargin=2.5em,labelsep=1em]")
+    for (cat, items) in col_to_items:
+        if not cat:
+            continue
+        joined = ", ".join(items)
+        # one tight line per category
+        lines.append(rf"\item \textbf{{{cat}}}: {joined}")
+    lines.append(r"\end{itemize}")
+    return "\n".join(lines)
 
 
 # --- main ---
@@ -327,6 +403,11 @@ def main():
         exp_rows_all = [norm_experience_row(r) for r in fetch_rows(EXPERIENCE_CSV)]
         EXP_TEX.parent.mkdir(parents=True, exist_ok=True)
         EXP_TEX.write_text(build_experience_tex(exp_rows_all), encoding="utf-8")
+    
+    if not SKILLS_CSV.startswith("PASTE_"):
+        skills_rows = fetch_rows(SKILLS_CSV)
+        SKL_TEX.parent.mkdir(parents=True, exist_ok=True)
+        SKL_TEX.write_text(build_skills_tex(skills_rows), encoding="utf-8")
 
     print(f"Wrote {PUBS_TEX}.")
     if not ACHIEVEMENTS_CSV.startswith("PASTE_"):

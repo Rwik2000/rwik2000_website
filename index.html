@@ -229,13 +229,12 @@
 
 
         <!-- Projects Section -->
-        <section id="projects" class="py-20">
+        <!-- <section id="projects" class="py-20">
             <h2 class="text-4xl font-bold text-center text-gray-900 dark:text-white mb-12">Projects</h2>
-            <!-- Projects will be dynamically inserted here -->
             <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <p id="projects-loading" class="text-center col-span-full py-8">Loading projects...</p>
             </div>
-        </section>
+        </section> -->
         
         <!-- Contact Section -->
         <section id="contact" class="py-20">
@@ -606,11 +605,11 @@
                 const listItem = document.createElement('li');
                 listItem.className = 'bg-gray-50 dark:bg-gray-800 p-6 rounded-lg border border-gray-200 dark:border-gray-700';
                 listItem.innerHTML = `
-                    <h3 class="text-xl font-bold text-gray-900 dark:text-white">
-                        <button class="open-modal hover:underline" data-modal="${modalId}">${pub.title || 'Untitled'}</button>
+                    <h3 class="text-xl font-bold text-gray-900 dark:text-white text-left">
+                        <button class="open-modal hover:underline text-left w-full" data-modal="${modalId}">${pub.title || 'Untitled'}</button>
                     </h3>
-                    <p class="text-gray-600 dark:text-gray-400">${pub.authors || ''}</p>
-                    <p class="text-gray-500 dark:text-gray-500 italic">${pub.venue || ''}</p>
+                    <p class="text-gray-600 dark:text-gray-400 text-left">${pub.authors || ''}</p>
+                    <p class="text-gray-500 dark:text-gray-500 italic text-left">${pub.venue || ''}</p>
                     <a href="${pub.link || '#'}" target="_blank" class="font-bold hover:underline text-sm mt-2 inline-block">Paper Link &rarr;</a>
                 `;
                 listContainer.appendChild(listItem);

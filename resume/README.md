@@ -71,7 +71,8 @@ This is a one-time setup process that involves configuring Google's services to 
     * Open your terminal and navigate to the folder containing `update_cv.py` and `credentials.json`.
     * Execute the script:
         ```bash
-        python update_cv.py
+        chmod +x build_resume.sh
+        ./build_resume.sh
         ```
 
 2.  **Authorize the Application (First Run Only):**
