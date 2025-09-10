@@ -117,19 +117,22 @@ def norm_experience_row(row:dict):
         "code_link":    g("Code Link", "Code", "Code URL", "Github", "GitHub"),
         "website_link": g("Project Website", "Website", "Project URL"),
         "video_link":   g("Video Link", "Video", "Demo Video"),
+        "image_link":   g("Image Link", "Image", "Demo Image"),
     }
 
 def _format_exp_links(r: dict) -> str:
     """Builds space-separated [paper] [code] [website] [video] hyperlinks if present."""
     links = []
     if r.get("paper_link"):
-        links.append(rf"\href{{{esc_edu(r['paper_link'])}}}{{[paper]}}")
+        links.append(rf"\href{{{esc_edu(r['paper_link'])}}}{{[Paper]}}")
     if r.get("code_link"):
-        links.append(rf"\href{{{esc_edu(r['code_link'])}}}{{[code]}}")
+        links.append(rf"\href{{{esc_edu(r['code_link'])}}}{{[Code]}}")
     if r.get("website_link"):
-        links.append(rf"\href{{{esc_edu(r['website_link'])}}}{{[website]}}")
+        links.append(rf"\href{{{esc_edu(r['website_link'])}}}{{[Website]}}")
     if r.get("video_link"):
-        links.append(rf"\href{{{esc_edu(r['video_link'])}}}{{[video]}}")
+        links.append(rf"\href{{{esc_edu(r['video_link'])}}}{{[Video]}}")
+    if r.get("image_link"):
+        links.append(rf"\href{{{esc_edu(r['image_link'])}}}{{[Image]}}")
     return " ".join(links)
 
 
