@@ -155,28 +155,29 @@ def build_publications_tex(pubs, pats):
         r"\vspace{5pt}",
         r"\noindent {\large \bf PUBLICATIONS \& PATENTS} \\ [-5pt]",
         r"\rule{\textwidth}{1.5pt}",
-        # r"\vspace{-10pt}",
-        r"\begin{enumerate}",
+        r"\vspace{-15pt}\\",
+        r"\begin{itemize}[leftmargin=2.5em,labelsep=1em]",
         # r"    \itemsep-0.3em",
     ]
     for r in pubs: lines.append(make_pub_item(r))
     for r in pats: lines.append(make_pub_item(r))
-    lines += [r"\end{enumerate}", ""]
+    lines += [r"\end{itemize}", ""]
     return "\n".join(lines)
 
 def build_achievements_tex(items):
     lines = [
         r"% AUTO-GENERATED — do not edit manually",
-        r"\noindent {\large \bf ACHIEVEMENTS} \\[-5pt]",
+        r"\vspace{5pt}",
+        r"\noindent {\large \bf AWARDS \& HONORS} \\[-5pt]",
         r"\rule{\textwidth}{1.5pt}\\",
-        r"\vspace{-12pt}",
+        r"\vspace{-5pt}",
         # r"",
-        r"\begin{enumerate}",
-        r"    \itemsep-0.3em",
+        r"\begin{itemize}[leftmargin=2.5em,labelsep=1em]",
+        # r"    \itemsep-0.3em",
     ]
     for txt in items:
         lines.append(f"    \\item {esc_edu(txt)}")
-    lines += [r"\end{enumerate}", ""]
+    lines += [r"\end{itemize}", ""]
     return "\n".join(lines)
 
 def split_program_lines(program:str)->str:
@@ -190,7 +191,7 @@ def build_education_tex(rows):
         r"% AUTO-GENERATED — do not edit manually",
         r"\noindent {\large \bf EDUCATION} \\[-5pt]",
         r"\rule{\textwidth}{1.5pt}\\",
-        r"",
+        r"\vspace{-5pt}\\",
     ]
     for r in rows:
         inst  = esc_edu(r["Institution"])
@@ -200,11 +201,11 @@ def build_education_tex(rows):
         aff   = esc_edu(r["Affiliations"])
         crs   = esc_edu(r["Courses"])
         lines.append(
-f"""{{\\bf {inst}}}{{  \\hfill \\textit{{{loc}}} \\\\[0pt]
-\\small{{{prog}\\hfill \\textit{{{dates}}} \\\\
-{aff}""" + (f""" \\\\
-\\textbf{{Relevant coursework}}: {crs}""" if crs else "") + """}}
-"""
+                    f"""{{\\bf {inst}}}{{  \\hfill \\textit{{{loc}}} \\\\\\
+                          \\small{{{prog}\\hfill \\textit{{{dates}}} \\\\\\
+                          {aff}""" + (f""" \\\\
+                          \\textbf{{Relevant coursework}}: {crs}""" if crs else "") + """}}
+                    """
         )
         lines.append(r"\vspace{5pt}")
     return "\n".join(lines)
@@ -214,7 +215,7 @@ def build_research_tex(paragraphs):
         r"% AUTO-GENERATED — do not edit manually",
         r"\noindent {\large \bf RESEARCH INTERESTS} \\[-5pt]",
         r"\rule{\textwidth}{1.5pt}\\",
-        # r"\vspace{0.5pt}",
+        r"\vspace{-5pt}",
         "",
     ]
     for i, para in enumerate(paragraphs):
@@ -237,9 +238,9 @@ def _desc_to_itemize(desc_raw: str) -> str:
     # Absolutely no vertical padding above/below or between items, with left indent
     return (
         "% tight list\n"
-        "\\vspace{-8pt}\n"
+        "\\vspace{-4pt}\n"
         "\\begin{itemize}[leftmargin=3.0em,labelsep=0.6em]\n"
-        "  \\setlength{\\itemsep}{0pt}\n"
+        "  \\setlength{\\itemsep}{0.45em}\n"
         "  \\setlength{\\parskip}{0pt}\n"
         "  \\setlength{\\parsep}{0pt}\n"
         "  \\setlength{\\topsep}{0pt}\n"
@@ -260,8 +261,8 @@ def build_experience_tex(rows):
         r"% AUTO-GENERATED — do not edit manually",
         r"\vspace{5pt}",
         r"\noindent {\large \bf EXPERIENCE} \\[-5pt]",
-        r"\rule{\textwidth}{1.5pt}",
-        r"\vspace{1pt}\\"
+        r"\rule{\textwidth}{1.5pt}\\",
+        r"\vspace{-5pt}\\"
         # r"{\setlength{\parskip}{0pt}\setlength{\parsep}{0pt}",  # suppress paragraph gaps locally
     ]
 
@@ -349,13 +350,13 @@ def build_skills_tex(rows):
 
     lines = [
         r"% AUTO-GENERATED — do not edit manually",
-        # r"\vspace{5pt}",
+        r"\vspace{5pt}",
         r"\noindent {\large \bf SKILLS} \\[-5pt]",
         r"\rule{\textwidth}{1.5pt}",
         r"\vspace{-6pt}",
         "",
     ]
-    lines.append(r"\begin{itemize}[leftmargin=2.5em,labelsep=1em]")
+    lines.append(r"\begin{itemize}[leftmargin=0.5em,labelsep=1em,label={}]")
     for (cat, items) in col_to_items:
         if not cat:
             continue
